@@ -13,5 +13,5 @@ export default function CourseDetailsPage() {
         <p>EnrollCd: {enrollCd} </p>
       </div>
     </BasicLayout>
-  )
+  );
 }
