@@ -24,7 +24,7 @@ function SingleQuarterDropdown({
 
   const [quarterState, setQuarterState] = useState(
     // Stryker disable next-line all : not sure how to test/mock local storage
-    localSearchQuarter ? localSearchQuarter : quarters[0].yyyyq
+    localSearchQuarter ? localSearchQuarter : quarters[0].yyyyq,
   );
 
   const handleQuarterOnChange = (event) => {
