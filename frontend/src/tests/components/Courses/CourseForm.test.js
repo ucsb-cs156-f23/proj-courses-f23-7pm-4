@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import CourseForm from "main/components/Courses/CourseForm";
 import { coursesFixtures } from "fixtures/pscourseFixtures";
-import { QueryClient, QueryClientProvider } from "react-query";
 
 const mockedNavigate = jest.fn();
 
@@ -38,21 +37,17 @@ describe("CourseForm tests", () => {
   });
 
   test("Correct Error messages on missing input", async () => {
-    const queryClient = new QueryClient();
     render(
-      <QueryClientProvider client={queryClient}>
       <Router>
         <CourseForm />
       </Router>,
-      </QueryClientProvider>,
     );
     expect(await screen.findByTestId("CourseForm-submit")).toBeInTheDocument();
     const submitButton = screen.getByTestId("CourseForm-submit");
 
     fireEvent.click(submitButton);
 
-    
-    expect(screen.getByText(/Enroll Code is required./)).toBeInTheDocument();
+    expect(await screen.findByText(/Enroll Code is required./)).toBeInTheDocument();
   });
 
   test("No Error messages on good input", async () => {
