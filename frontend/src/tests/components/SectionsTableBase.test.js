@@ -135,8 +135,9 @@ describe("SectionsTableBase tests", () => {
       <SectionsTableBase columns={columns} data={fiveSections} group={false} />,
     );
 
-    expect(screen.getByText("➕")).toBeInTheDocument();
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
+    expect(screen.queryByText("➕")).not.toBeInTheDocument();
+
     expect(
       screen.getByTestId(
         "testid-cell-row-1-col-courseInfo.courseId-expand-symbols",
