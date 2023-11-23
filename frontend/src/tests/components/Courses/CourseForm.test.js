@@ -59,9 +59,9 @@ describe("CourseForm tests", () => {
       </Router>,
     );
 
-    expect(await screen.findByTestId("CourseForm-schedule")).toBeInTheDocument();
+    expect(await screen.findByTestId("CourseForm-psId")).toBeInTheDocument();
 
-    const schedule = document.querySelector("#CourseForm-schedule");
+    const schedule = document.querySelector("#CourseForm-psId");
     const enrollCd = screen.getByTestId("CourseForm-enrollCd");
     const submitButton = screen.getByTestId("CourseForm-submit");
 
