@@ -76,14 +76,15 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
           {errors.psId?.message}
         </Form.Control.Feedback>
       </Form.Group> */}
-      <Form.Group className="mb-3" data-testid="CourseForm-psId">
+      <Form.Group className="mb-3" data-testid="CourseForm-schedule">
         <SingleQuarterDropdown
-          quarter={quarter}
+          schedule={quarter}
           setQuarter={setQuarter}
-          controlId={"CourseForm-psId"}
+          controlId={"CourseForm-schedule"}
           label={"Schedule"}
           quarters={quarters}
         />
+        
         
       </Form.Group>
       {/* <Form.Group className="mb-3">

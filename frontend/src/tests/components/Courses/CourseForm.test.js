@@ -59,13 +59,13 @@ describe("CourseForm tests", () => {
       </Router>,
     );
 
-    expect(await screen.findByTestId("CourseForm-psId")).toBeInTheDocument();
+    expect(await screen.findByTestId("CourseForm-schedule")).toBeInTheDocument();
 
-    const psId = screen.getByTestId("CourseForm-psId");
+    const schedule = document.querySelector("#CourseForm-schedule");
     const enrollCd = screen.getByTestId("CourseForm-enrollCd");
     const submitButton = screen.getByTestId("CourseForm-submit");
 
-    fireEvent.change(psId, { target: { value: 13 } });
+    fireEvent.change(schedule, { target: { value: "20124" } });
     fireEvent.change(enrollCd, { target: { value: "20124" } });
     fireEvent.click(submitButton);
 
