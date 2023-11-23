@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">69.23% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>26/26</span>
+                <span class='fraction'>18/26</span>
             </div>
         
             
@@ -180,7 +180,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,17 +193,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">315x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">279x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,14 +207,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">147x</span>
-<span class="cline-any cline-yes">147x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">131x</span>
+<span class="cline-any cline-yes">131x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1305x</span>
+<span class="cline-any cline-yes">1179x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -320,7 +320,7 @@ export default function SectionsTableBase({
           return (
             &lt;Fragment key={`row-${i}`}&gt;
               {row.cells[0].isGrouped ||
-              (!row.cells[0].isGrouped &amp;&amp; row.allCells[3].value) ? (
+              (<span class="branch-1 cbranch-no" title="branch not covered" >!row.cells[0].isGrouped </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >row.allCells[3].value)</span> ? (
                 &lt;tr {...row.getRowProps()}&gt;
                   {row.cells.map((cell, _index) =&gt; {
                     return (
@@ -333,28 +333,28 @@ export default function SectionsTableBase({
                             ? "#34859b"
                             : cell.isAggregated
                             ? "#34859b"
-                            : "#9dbfbe",
+                            : <span class="branch-1 cbranch-no" title="branch not covered" >"#9dbfbe",</span>
                           color: cell.isGrouped
                             ? "#effcf4"
                             : cell.isAggregated
                             ? "#effcf4"
-                            : "#000000",
+                            : <span class="branch-1 cbranch-no" title="branch not covered" >"#000000",</span>
                           fontWeight: cell.isGrouped
                             ? "bold"
                             : cell.isAggregated
                             ? "bold"
-                            : "normal",
+                            : <span class="branch-1 cbranch-no" title="branch not covered" >"normal",</span>
                         }}
                       &gt;
                         {cell.isGrouped ? (
                           &lt;&gt;
                             &lt;span
-                              {...row.getToggleRowExpandedProps()}
+                              // {...row.getToggleRowExpandedProps()}
                               data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-expand-symbols`}
                             &gt;
                               {row.subRows.length &gt; 1
                                 ? row.isExpanded
-                                  ? ""
+                                  ? <span class="branch-0 cbranch-no" title="branch not covered" >""</span>
                                   : ""
                                 : null}
                             &lt;/span&gt;{" "}
@@ -363,14 +363,14 @@ export default function SectionsTableBase({
                         ) : cell.isAggregated ? (
                           cell.render("Aggregated")
                         ) : (
-                          cell.render("Cell")
+<span class="branch-1 cbranch-no" title="branch not covered" >                          cell.render("Cell")</span>
                         )}
                         &lt;&gt;&lt;/&gt;
                       &lt;/td&gt;
                     );
                   })}
                 &lt;/tr&gt;
-              ) : null}
+              ) : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span>
             &lt;/Fragment&gt;
           );
         })}
@@ -385,7 +385,7 @@ export default function SectionsTableBase({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Nov 22 2023 23:15:38 GMT-0800 (Pacific Standard Time)
+                at Thu Nov 23 2023 14:10:03 GMT-0800 (Pacific Standard Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
