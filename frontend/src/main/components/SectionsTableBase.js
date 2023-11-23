@@ -79,8 +79,8 @@ export default function SectionsTableBase({
                             >
                               {row.subRows.length > 1
                                 ? row.isExpanded
-                                  ? ""
-                                  : ""
+                                  ? "➖ "
+                                  : "➕ "
                                 : null}
                             </span>{" "}
                             {cell.render("Cell")}
