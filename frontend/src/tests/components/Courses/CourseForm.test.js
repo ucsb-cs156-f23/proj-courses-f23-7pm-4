@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import CourseForm from "main/components/Courses/CourseForm";
 import { coursesFixtures } from "fixtures/pscourseFixtures";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const mockedNavigate = jest.fn();
 
@@ -19,7 +20,7 @@ describe("CourseForm tests", () => {
       </Router>,
     );
 
-    expect(await screen.findByText(/Personal Schedule ID/)).toBeInTheDocument();
+    expect(await screen.findByText(/Schedule/)).toBeInTheDocument();
     expect(screen.getByText(/Enrollment Code/)).toBeInTheDocument();
     expect(screen.getByText(/Create/)).toBeInTheDocument();
   });
@@ -37,19 +38,20 @@ describe("CourseForm tests", () => {
   });
 
   test("Correct Error messages on missing input", async () => {
+    const queryClient = new QueryClient();
     render(
+      <QueryClientProvider client={queryClient}>
       <Router>
         <CourseForm />
       </Router>,
+      </QueryClientProvider>,
     );
     expect(await screen.findByTestId("CourseForm-submit")).toBeInTheDocument();
     const submitButton = screen.getByTestId("CourseForm-submit");
 
     fireEvent.click(submitButton);
 
-    expect(
-      await screen.findByText(/Personal Schedule ID is required./),
-    ).toBeInTheDocument();
+    
     expect(screen.getByText(/Enroll Code is required./)).toBeInTheDocument();
   });
 

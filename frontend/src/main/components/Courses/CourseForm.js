@@ -1,18 +1,32 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import SingleQuarterDropdown from "../Quarters/SingleQuarterDropdown";
+import { quartersNewRange } from "main/utils/quarterUtilities";
+
 
 function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
   // Stryker disable all
   const {
     register,
     formState: { errors },
+    data: systemInfo,
     handleSubmit,
   } = useForm({ defaultValues: initialCourse || {} });
   // Stryker enable all
+  
+  const startQtr = systemInfo?.startQtrYYYYQ || "20211";
+  const endQtr = systemInfo?.endQtrYYYYQ || "20214";
+  const quarters = quartersNewRange(startQtr, endQtr);
 
   const navigate = useNavigate();
+  const [quarter, setQuarter] = useState(
+    {
+      quarters: quarters,
+    }.quarters[0],
+  );
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
@@ -46,7 +60,8 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group className="mb-3">
+      
+      {/* <Form.Group className="mb-3"> 
         <Form.Label htmlFor="psId">Personal Schedule ID</Form.Label>
         <Form.Control
           data-testid="CourseForm-psId"
@@ -60,7 +75,27 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
         <Form.Control.Feedback type="invalid">
           {errors.psId?.message}
         </Form.Control.Feedback>
+      </Form.Group> */}
+      <Form.Group className="mb-3" data-testid="CourseForm-psId">
+        <SingleQuarterDropdown
+          quarter={quarter}
+          setQuarter={setQuarter}
+          controlId={"CourseForm-psId"}
+          label={"Schedule"}
+          quarters={quarters}
+        />
+        
       </Form.Group>
+      {/* <Form.Group className="mb-3">
+      <Form.Label htmlFor="psId">Personal Schedule ID</Form.Label>
+      <SingleQuarterDropdown
+          psId={psId}
+          setQuarter={setQuarter}
+          controlId={"PersonalScheduleForm-quarter"}
+          label={"Quarter"}
+          quarters={quarters}
+        />
+      </Form.Group> */}
 
       <Button type="submit" data-testid="CourseForm-submit">
         {buttonLabel}
@@ -75,5 +110,5 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
     </Form>
   );
 }
-
+// CHANGETHIS: line 50-64 FOLLOWING PERSONALSCHEDULEFORM
 export default CourseForm;
