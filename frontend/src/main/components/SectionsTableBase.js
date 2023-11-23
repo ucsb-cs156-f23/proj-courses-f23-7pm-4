@@ -74,13 +74,12 @@ export default function SectionsTableBase({
                         {cell.isGrouped ? (
                           <>
                             <span
-                              {...row.getToggleRowExpandedProps()}
                               data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-expand-symbols`}
                             >
                               {row.subRows.length > 1
                                 ? row.isExpanded
-                                  ? "➖ "
-                                  : "➕ "
+                                  ? ""
+                                  : ""
                                 : null}
                             </span>{" "}
                             {cell.render("Cell")}
