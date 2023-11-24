@@ -17,6 +17,7 @@ import PersonalSchedulesEditPage from "main/pages/PersonalSchedules/PersonalSche
 import PersonalSchedulesDetailsPage from "main/pages/PersonalSchedules/PersonalSchedulesDetailsPage";
 import SectionSearchesIndexPage from "main/pages/SectionSearches/SectionSearchesIndexPage";
 
+import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
 import CoursesIndexPage from "main/pages/Courses/PSCourseIndexPage";
 import CoursesCreatePage from "main/pages/Courses/PSCourseCreatePage";
 
@@ -77,6 +78,11 @@ function App() {
               exact
               path="/personalschedules/details/:id"
               element={<PersonalSchedulesDetailsPage />}
+            />
+            <Route
+              exact
+              path="/coursedetails/:qyy/:enrollCd"
+              element={<CourseDetailsPage />}
             />
           </>
         )}
