@@ -21,7 +21,7 @@ export default function SectionsTableBase({
         data,
       },
       useGroupBy,
-      useExpanded
+      useExpanded,
     );
 
   return (
