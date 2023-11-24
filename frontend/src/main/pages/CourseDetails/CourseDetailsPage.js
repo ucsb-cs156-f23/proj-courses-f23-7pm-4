@@ -15,6 +15,8 @@ export default function CourseDetailsPage() {
       url: `/api/sections/sectionsearch?qtr=${yyyyq}&enrollCode=${enrollCd}`,
     },
   );
+  console.log(yyyyq);
+  console.log(personalSection);
 
   return (
     <BasicLayout>
