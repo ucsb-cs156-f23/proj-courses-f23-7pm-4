@@ -113,7 +113,7 @@ describe("SectionsTableBase tests", () => {
 
   test("renders an full table without crashing", () => {
     render(
-      <SectionsTableBase columns={columns} data={gigaSections} group={false} />
+      <SectionsTableBase columns={columns} data={gigaSections} group={false} />,
     );
   });
 
@@ -123,7 +123,7 @@ describe("SectionsTableBase tests", () => {
         columns={columns}
         data={oneLectureSectionWithNoDiscussion}
         group={false}
-      />
+      />,
     );
 
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
@@ -132,21 +132,21 @@ describe("SectionsTableBase tests", () => {
 
   test("renders five sections (one with no discussion then lecture with three discussions) correctly", async () => {
     render(
-      <SectionsTableBase columns={columns} data={fiveSections} group={false} />
+      <SectionsTableBase columns={columns} data={fiveSections} group={false} />,
     );
 
     expect(screen.getByText("➕")).toBeInTheDocument();
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
     expect(
       screen.getByTestId(
-        "testid-cell-row-1-col-courseInfo.courseId-expand-symbols"
-      )
+        "testid-cell-row-1-col-courseInfo.courseId-expand-symbols",
+      ),
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("testid-cell-row-0-col-courseInfo.courseId")
+      screen.getByTestId("testid-cell-row-0-col-courseInfo.courseId"),
     ).toHaveAttribute(
       "style",
-      "background: rgb(52, 133, 155); color: rgb(239, 252, 244); font-weight: bold;"
+      "background: rgb(52, 133, 155); color: rgb(239, 252, 244); font-weight: bold;",
     );
   });
 
@@ -157,7 +157,7 @@ describe("SectionsTableBase tests", () => {
         data={fiveSections}
         group={false}
         page="CourseOverTimeInstructor"
-      />
+      />,
     );
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
     expect(screen.queryByText("➕")).not.toBeInTheDocument();
