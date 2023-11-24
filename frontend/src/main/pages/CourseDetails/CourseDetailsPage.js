@@ -11,10 +11,12 @@ export default function CourseDetailsPage() {
     error: _error,
     status: _status,
   } = useBackend(
+    // Stryker disable all : hard to test for query caching
     [`/api/sections/sectionsearch?qtr=${qyy}&enrollCode=${enrollCd}`],
     {
+      // Stryker disable next-line all : GET is the default, so changing this to "" doesn't introduce a bug
       method: "GET",
-      url: `/api/sections/sectionsearch?qtr=${qyy}&enrollCode=${enrollCd}`,
+      url: `/api/sections/sectionsearch`,
       params: {
         qtr: qyy,
         enrollCode: enrollCd,
@@ -22,8 +24,6 @@ export default function CourseDetailsPage() {
     },
     [],
   );
-
-  console.log(personalSection.title);
 
   return (
     <BasicLayout>

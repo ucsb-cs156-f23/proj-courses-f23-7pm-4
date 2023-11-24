@@ -1,6 +1,5 @@
 import React from "react";
 import OurTable from "main/components/OurTable";
-import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 
 export default function CourseDetailsTable({ course }) {
   const columns = [
@@ -10,8 +9,7 @@ export default function CourseDetailsTable({ course }) {
     },
     {
       Header: "Quarter",
-      accessor: (row) => (row.quarter ? yyyyqToQyy(row.quarter) : ""),
-      id: "quarter",
+      accessor: "quarter",
     },
     {
       Header: "Enroll Code",
