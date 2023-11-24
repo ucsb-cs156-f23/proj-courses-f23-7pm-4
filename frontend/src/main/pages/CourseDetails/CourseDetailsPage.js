@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 export default function CourseDetailsPage() {
   const { qyy, enrollCd } = useParams();
 
-  const { 
+  const {
     data: personalSection,
     error: _error,
     status: _status,
@@ -29,7 +29,7 @@ export default function CourseDetailsPage() {
     <BasicLayout>
       <div>
         <h1>Course Details Placeholder Page</h1>
-        { personalSection && (<CourseDetailsTable course={[personalSection]} />)}
+        {personalSection && <CourseDetailsTable course={[personalSection]} />}
       </div>
     </BasicLayout>
   );

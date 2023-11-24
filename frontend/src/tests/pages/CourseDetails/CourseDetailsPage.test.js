@@ -1,4 +1,4 @@
-import { render, screen,  waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import axios from "axios";
@@ -52,32 +52,35 @@ describe("CourseDetailsPage tests", () => {
   test("shows the correct info for admin users", async () => {
     setupAdminUser();
     const queryClient = new QueryClient();
-    axiosMock.onGet(`/api/sections/sectionsearch?qtr=20221&enrollCode=12583`).reply(200, {
-      "quarter": "20221",
-      "courseId": "ECE       1A ",
-      "title": "COMP ENGR SEMINAR",
-      "contactHours": 10,
-      "description": "Introductory seminar to expose students to a broad range of topics in computer   engineering.",
-      "college": "ENGR",
-      "objLevelCode": "U",
-      "subjectArea": "ECE     ",
-      "unitsFixed": 1,
-      "unitsVariableHigh": null,
-      "unitsVariableLow": null,
-      "delayedSectioning": null,
-      "inProgressCourse": null,
-      "gradingOption": "P",
-      "instructionType": "SEM",
-      "onLineCourse": false,
-      "deptCode": "ECE  ",
-      "generalEducation": [],
-      "classSections": [
+    axiosMock
+      .onGet(`/api/sections/sectionsearch?qtr=20221&enrollCode=12583`)
+      .reply(200, {
+        quarter: "20221",
+        courseId: "ECE       1A ",
+        title: "COMP ENGR SEMINAR",
+        contactHours: 10,
+        description:
+          "Introductory seminar to expose students to a broad range of topics in computer   engineering.",
+        college: "ENGR",
+        objLevelCode: "U",
+        subjectArea: "ECE     ",
+        unitsFixed: 1,
+        unitsVariableHigh: null,
+        unitsVariableLow: null,
+        delayedSectioning: null,
+        inProgressCourse: null,
+        gradingOption: "P",
+        instructionType: "SEM",
+        onLineCourse: false,
+        deptCode: "ECE  ",
+        generalEducation: [],
+        classSections: [
           {
-              "enrollCode": "12583",
-              "section": "0100",
-          }
-      ]
-    });
+            enrollCode: "12583",
+            section: "0100",
+          },
+        ],
+      });
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -88,18 +91,8 @@ describe("CourseDetailsPage tests", () => {
     );
 
     // assert
-    const expectedHeaders = [
-      "Quarter",
-      "Course ID",
-      "Title",
-      "Enroll Code",
-    ];
-    const expectedFields = [
-      "quarter",
-      "courseId",
-      "title",
-      "enrollCode",
-    ];
+    const expectedHeaders = ["Quarter", "Course ID", "Title", "Enroll Code"];
+    const expectedFields = ["quarter", "courseId", "title", "enrollCode"];
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -111,12 +104,14 @@ describe("CourseDetailsPage tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    console.log(screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`).textContent);
+    console.log(
+      screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`).textContent,
+    );
 
     await waitFor(() =>
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
-    ).toHaveTextContent("ECE 1A")
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
+      ).toHaveTextContent("ECE 1A"),
     );
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-quarter`),
@@ -127,6 +122,5 @@ describe("CourseDetailsPage tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-title`),
     ).toHaveTextContent("COMP ENGR SEMINAR");
-
   });
 });

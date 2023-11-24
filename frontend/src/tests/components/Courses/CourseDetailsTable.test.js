@@ -28,23 +28,15 @@ describe("CourseDetailsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CourseDetailsTable course={personalSectionsFixtures.threePersonalSections} />
+          <CourseDetailsTable
+            course={personalSectionsFixtures.threePersonalSections}
+          />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = [
-      "Quarter",
-      "Course ID",
-      "Title",
-      "Enroll Code",
-    ];
-    const expectedFields = [
-      "quarter",
-      "courseId",
-      "title",
-      "enrollCode",
-    ];
+    const expectedHeaders = ["Quarter", "Course ID", "Title", "Enroll Code"];
+    const expectedFields = ["quarter", "courseId", "title", "enrollCode"];
     const testId = "CourseDetailsTable";
 
     expectedHeaders.forEach((headerText) => {

@@ -28,11 +28,5 @@ export default function CourseDetailsTable({ course }) {
 
   const columnsToDisplay = columns;
 
-  return (
-    <OurTable
-      data={course}
-      columns={columnsToDisplay}
-      testid={testid}
-    />
-  );
+  return <OurTable data={course} columns={columnsToDisplay} testid={testid} />;
 }
