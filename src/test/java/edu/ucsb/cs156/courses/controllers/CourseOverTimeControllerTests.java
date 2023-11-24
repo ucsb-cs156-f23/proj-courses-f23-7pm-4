@@ -13,7 +13,6 @@ import edu.ucsb.cs156.courses.config.SecurityConfig;
 import edu.ucsb.cs156.courses.documents.ConvertedSection;
 import edu.ucsb.cs156.courses.documents.CourseInfo;
 import edu.ucsb.cs156.courses.documents.Section;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +29,6 @@ import org.springframework.test.web.servlet.MvcResult;
 @WebMvcTest(value = CourseOverTimeController.class)
 @Import(SecurityConfig.class)
 @AutoConfigureDataJpa
-@Slf4j
 public class CourseOverTimeControllerTests {
   private ObjectMapper mapper = new ObjectMapper();
 

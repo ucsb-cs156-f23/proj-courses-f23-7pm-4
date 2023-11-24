@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ucsb.cs156.courses.config.SecurityConfig;
 import edu.ucsb.cs156.courses.repositories.UserRepository;
 import edu.ucsb.cs156.courses.services.UCSBCurriculumService;
-import lombok.extern.slf4j.Slf4j;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import org.springframework.test.web.servlet.MvcResult;
 @WebMvcTest(value = UCSBCurriculumController.class)
 @Import(SecurityConfig.class)
 @AutoConfigureDataJpa
-@Slf4j
 public class UCSBCurriculumControllerTests {
 
   private ObjectMapper mapper = new ObjectMapper();
