@@ -6,7 +6,6 @@ import edu.ucsb.cs156.courses.collections.ConvertedSectionCollection;
 import edu.ucsb.cs156.courses.documents.ConvertedSection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(&quot;/api/public/courseovertime&quot;)
-<span class="fc" id="L21">@Slf4j</span>
-<span class="fc" id="L22">public class CourseOverTimeBuildingController {</span>
+<span class="fc" id="L20">public class CourseOverTimeBuildingController {</span>
 
-<span class="fc" id="L24">  private ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L22">  private ObjectMapper mapper = new ObjectMapper();</span>
 
   @Autowired ConvertedSectionCollection convertedSectionCollection;
 
@@ -52,11 +50,11 @@ import org.springframework.web.bind.annotation.RestController;
           @RequestParam
           String buildingCode)
       throws JsonProcessingException {
-<span class="fc" id="L55">    List&lt;ConvertedSection&gt; courseResults =</span>
-<span class="fc" id="L56">        convertedSectionCollection.findByQuarterRangeAndBuildingCode(</span>
+<span class="fc" id="L53">    List&lt;ConvertedSection&gt; courseResults =</span>
+<span class="fc" id="L54">        convertedSectionCollection.findByQuarterRangeAndBuildingCode(</span>
             startQtr, endQtr, buildingCode);
-<span class="fc" id="L58">    String body = mapper.writeValueAsString(courseResults);</span>
-<span class="fc" id="L59">    return ResponseEntity.ok().body(body);</span>
+<span class="fc" id="L56">    String body = mapper.writeValueAsString(courseResults);</span>
+<span class="fc" id="L57">    return ResponseEntity.ok().body(body);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
