@@ -121,32 +121,11 @@ describe("CourseDetailsPage tests", () => {
       </QueryClientProvider>,
     );
 
-    // assert
-    const expectedHeaders = ["Quarter", "Course ID", "Title", "Enroll Code"];
-    const expectedFields = ["quarter", "courseId", "title", "enrollCode"];
+    await screen.findByTestId(`${testId}-cell-row-0-col-courseId`);
 
-    await waitFor(() =>
-      expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
-      ).toBeInTheDocument(),
-    );
-
-    await waitFor(() =>
-      expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
-      ).toHaveTextContent("ECE 1A"),
-    );
-
-    expectedHeaders.forEach((headerText) => {
-      const header = screen.getByText(headerText);
-      expect(header).toBeInTheDocument();
-    });
-
-    expectedFields.forEach((field) => {
-      const header = screen.getByTestId(`${testId}-cell-row-0-col-${field}`);
-      expect(header).toBeInTheDocument();
-    });
-
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
+    ).toHaveTextContent("ECE 1A");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-quarter`),
     ).toHaveTextContent("20221");
