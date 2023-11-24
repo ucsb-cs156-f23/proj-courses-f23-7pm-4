@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ucsb.cs156.courses.repositories.UserRepository;
 import edu.ucsb.cs156.courses.services.UCSBCurriculumService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(&quot;/api/sections&quot;)
-<span class="fc" id="L17">public class UCSBSectionsController {</span>
-<span class="fc" id="L18">  private ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L16">public class UCSBSectionsController {</span>
+<span class="fc" id="L17">  private ObjectMapper mapper = new ObjectMapper();</span>
 
   @Autowired UserRepository userRepository;
 
@@ -26,18 +25,18 @@ import org.springframework.web.bind.annotation.RestController;
       @RequestParam String qtr, @RequestParam String dept, @RequestParam String level)
       throws JsonProcessingException {
 
-<span class="fc" id="L29">    String body = ucsbCurriculumService.getSectionJSON(dept, qtr, level);</span>
+<span class="fc" id="L28">    String body = ucsbCurriculumService.getSectionJSON(dept, qtr, level);</span>
 
-<span class="fc" id="L31">    return ResponseEntity.ok().body(body);</span>
+<span class="fc" id="L30">    return ResponseEntity.ok().body(body);</span>
   }
 
   @GetMapping(value = &quot;/sectionsearch&quot;, produces = &quot;application/json&quot;)
   public ResponseEntity&lt;String&gt; sectionsearch(
       @RequestParam String qtr, @RequestParam String enrollCode) {
 
-<span class="fc" id="L38">    String body = ucsbCurriculumService.getSection(enrollCode, qtr);</span>
+<span class="fc" id="L37">    String body = ucsbCurriculumService.getSection(enrollCode, qtr);</span>
 
-<span class="fc" id="L40">    return ResponseEntity.ok().body(body);</span>
+<span class="fc" id="L39">    return ResponseEntity.ok().body(body);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
