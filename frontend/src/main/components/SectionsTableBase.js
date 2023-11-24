@@ -21,7 +21,7 @@ export default function SectionsTableBase({
         data,
       },
       useGroupBy,
-      useExpanded,
+      useExpanded
     );
 
   return (
@@ -75,16 +75,16 @@ export default function SectionsTableBase({
                         {cell.isGrouped ? (
                           <>
                             {page !== "CourseOverTimeInstructor" && (
-                            <span
-                              {...row.getToggleRowExpandedProps()}
-                              data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-expand-symbols`}
-                            >
-                              {row.subRows.length > 1
-                                ? row.isExpanded
-                                  ? "➖ "
-                                  : "➕ "
-                                : null}
-                            </span>
+                              <span
+                                {...row.getToggleRowExpandedProps()}
+                                data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-expand-symbols`}
+                              >
+                                {row.subRows.length > 1
+                                  ? row.isExpanded
+                                    ? "➖ "
+                                    : "➕ "
+                                  : null}
+                              </span>
                             )}
                             {cell.render("Cell")}
                           </>
