@@ -6,9 +6,7 @@ import { useParams } from "react-router-dom";
 export default function CourseDetailsPage() {
   const { yyyyq, enrollCd } = useParams();
 
-  const {
-    data: personalSection
-  } = useBackend(
+  const { data: personalSection } = useBackend(
     // Stryker disable all : hard to test for query caching
     [`/api/sections/sectionsearch?qtr=${yyyyq}&enrollCode=${enrollCd}`],
     {
