@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/public/courseovertime")
 public class CourseOverTimeInstructorController {
-
   private ObjectMapper mapper = new ObjectMapper();
 
   @Autowired ConvertedSectionCollection convertedSectionCollection;

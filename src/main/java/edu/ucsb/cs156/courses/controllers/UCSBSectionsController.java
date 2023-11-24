@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/sections")
 public class UCSBSectionsController {
-
   private ObjectMapper mapper = new ObjectMapper();
 
   @Autowired UserRepository userRepository;
