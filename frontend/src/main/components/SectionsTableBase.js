@@ -7,6 +7,7 @@ export default function SectionsTableBase({
   columns,
   data,
   testid = "testid",
+  page,
 }) {
   // Stryker disable next-line ObjectLiteral
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -73,6 +74,7 @@ export default function SectionsTableBase({
                       >
                         {cell.isGrouped ? (
                           <>
+                            {page !== "CourseOverTimeInstructor" && (
                             <span
                               {...row.getToggleRowExpandedProps()}
                               data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-expand-symbols`}
@@ -82,7 +84,8 @@ export default function SectionsTableBase({
                                   ? "➖ "
                                   : "➕ "
                                 : null}
-                            </span>{" "}
+                            </span>
+                            )}
                             {cell.render("Cell")}
                           </>
                         ) : cell.isAggregated ? (

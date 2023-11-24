@@ -149,4 +149,12 @@ describe("SectionsTableBase tests", () => {
       "background: rgb(52, 133, 155); color: rgb(239, 252, 244); font-weight: bold;",
     );
   });
+
+  test("when on Instructor Search Page, No +/- is displayed for dropdown", () => {
+    render(
+      <SectionsTableBase columns={columns} data={fiveSections} group={false} page="CourseOverTimeInstructor"/>,
+    );
+    expect(screen.queryByText("➖")).not.toBeInTheDocument();
+    expect(screen.queryByText("➕")).not.toBeInTheDocument();
+  })
 });
