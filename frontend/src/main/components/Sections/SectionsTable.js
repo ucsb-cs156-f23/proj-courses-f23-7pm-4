@@ -17,8 +17,6 @@ function getFirstVal(values) {
 export default function SectionsTable(props) {
   // Stryker enable all
   // Stryker disable BooleanLiteral
-
-  console.log(props);
   const columns = [
     {
       Header: "Quarter",
