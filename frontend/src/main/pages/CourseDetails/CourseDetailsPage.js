@@ -2,7 +2,7 @@ import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import { useParams } from "react-router-dom";
 
 export default function CourseDetailsPage() {
-  let { qyy, enrollCd } = useParams();
+  const { qyy, enrollCd } = useParams();
 
   return (
     <BasicLayout>
