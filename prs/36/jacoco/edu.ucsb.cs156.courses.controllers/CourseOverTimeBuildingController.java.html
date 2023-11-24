@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(&quot;/api/public/courseovertime&quot;)
 <span class="fc" id="L20">public class CourseOverTimeBuildingController {</span>
-
-<span class="fc" id="L22">  private ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L21">  private ObjectMapper mapper = new ObjectMapper();</span>
 
   @Autowired ConvertedSectionCollection convertedSectionCollection;
 
@@ -50,11 +49,11 @@ import org.springframework.web.bind.annotation.RestController;
           @RequestParam
           String buildingCode)
       throws JsonProcessingException {
-<span class="fc" id="L53">    List&lt;ConvertedSection&gt; courseResults =</span>
-<span class="fc" id="L54">        convertedSectionCollection.findByQuarterRangeAndBuildingCode(</span>
+<span class="fc" id="L52">    List&lt;ConvertedSection&gt; courseResults =</span>
+<span class="fc" id="L53">        convertedSectionCollection.findByQuarterRangeAndBuildingCode(</span>
             startQtr, endQtr, buildingCode);
-<span class="fc" id="L56">    String body = mapper.writeValueAsString(courseResults);</span>
-<span class="fc" id="L57">    return ResponseEntity.ok().body(body);</span>
+<span class="fc" id="L55">    String body = mapper.writeValueAsString(courseResults);</span>
+<span class="fc" id="L56">    return ResponseEntity.ok().body(body);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
