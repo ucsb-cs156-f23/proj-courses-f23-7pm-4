@@ -14,7 +14,7 @@ function getFirstVal(values) {
   return values[0];
 }
 
-export default function SectionsTable({ sections }) {
+export default function SectionsTable({ sections, canExpand = true }) {
   // Stryker enable all
   // Stryker disable BooleanLiteral
   const columns = [
@@ -113,6 +113,7 @@ export default function SectionsTable({ sections }) {
       data={sections}
       columns={columnsToDisplay}
       testid={testid}
+      canExpand={canExpand}
     />
   );
 }
