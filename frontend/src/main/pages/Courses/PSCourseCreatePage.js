@@ -3,6 +3,7 @@ import CourseForm from "main/components/Courses/CourseForm";
 import { Navigate } from "react-router-dom";
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
+import { stringToLong } from "main/utils/CoursesUtils";
 
 export default function CoursesCreatePage() {
   const objectToAxiosParams = (course) => ({
@@ -10,7 +11,7 @@ export default function CoursesCreatePage() {
     method: "POST",
     params: {
       enrollCd: course.enrollCd,
-      psId: course.psId,
+      psId: stringToLong(course.psId),
     },
   });
 

@@ -1,5 +1,4 @@
 const quarters = ["WINTER", "SPRING", "SUMMER", "FALL"];
-const quartersInLowercase = ["Winter", "Spring", "Summer", "Fall"];
 
 const shortQuarters = ["W", "S", "M", "F"];
 
@@ -85,27 +84,6 @@ const quarterRange = (beginYYYYQStr, endYYYYQStr) => {
   return quarterList;
 };
 
-const quartersNewRange = (beginYYYYQStr, endYYYYQStr) => {
-  let quarterList = [];
-  const beginYYYYQInt = toNumericYYYYQ(beginYYYYQStr);
-  const endYYYYQInt = toNumericYYYYQ(endYYYYQStr);
-  for (
-    let yyyyqInt = beginYYYYQInt;
-    yyyyqInt <= endYYYYQInt;
-    yyyyqInt = nextQuarter(yyyyqInt)
-  ) {
-    const yyyyqStr = fromNumericYYYYQ(yyyyqInt);
-    quarterList.push({
-      yyyyq: yyyyqStr,
-      qyy: `${shortQuarters[parseInt(yyyyqStr.charAt(4)) - 1]}${yyyyqStr.substring(
-        2,
-        4,
-      )}${" "}${quartersInLowercase[parseInt(yyyyqStr.charAt(4)) - 1]}${" Courses"}`,
-    });
-  }
-  return quarterList;
-};
-
 export {
   fromFormat,
   toFormat,
@@ -114,6 +92,5 @@ export {
   toNumericYYYYQ,
   nextQuarter,
   quarterRange,
-  quartersNewRange,
   qtrNumToQuarter,
 };

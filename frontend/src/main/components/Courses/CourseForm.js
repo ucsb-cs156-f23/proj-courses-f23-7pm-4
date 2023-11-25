@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import SingleQuarterDropdown from "../Quarters/SingleQuarterDropdown";
-import { quartersNewRange } from "main/utils/quarterUtilities";
+import { quartersNewRange } from "main/utils/CoursesUtils";
 
 
 function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
