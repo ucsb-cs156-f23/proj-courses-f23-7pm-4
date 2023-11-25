@@ -14,7 +14,7 @@ function getFirstVal(values) {
   return values[0];
 }
 
-export default function SectionsTable({sections, canExpand=true}) {
+export default function SectionsTable({ sections, canExpand = true }) {
   // Stryker enable all
   // Stryker disable BooleanLiteral
   const columns = [
