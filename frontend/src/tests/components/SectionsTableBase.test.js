@@ -150,7 +150,7 @@ describe("SectionsTableBase tests", () => {
     );
   });
 
-  test("when canExpand set to false, no dropdown buttons are displayed, ", () => {
+  test("when canExpand set to false, no dropdown buttons are displayed", () => {
     render(
       <SectionsTableBase
         columns={columns}
