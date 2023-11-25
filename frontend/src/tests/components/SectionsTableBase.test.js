@@ -156,7 +156,7 @@ describe("SectionsTableBase tests", () => {
         columns={columns}
         data={fiveSections}
         group={false}
-        page="CourseOverTimeInstructor"
+        canExpand={false}
       />,
     );
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
