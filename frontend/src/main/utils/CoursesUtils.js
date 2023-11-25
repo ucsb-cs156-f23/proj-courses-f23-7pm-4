@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-const quarters = ["WINTER", "SPRING", "SUMMER", "FALL"];
 const quartersInLowercase = ["Winter", "Spring", "Summer", "Fall"];
 
 const shortQuarters = ["W", "S", "M", "F"];
