@@ -18,7 +18,7 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
   // Stryker enable all
   
   const startQtr = systemInfo?.startQtrYYYYQ || "20211";
-  const endQtr = systemInfo?.endQtrYYYYQ || "20214";
+  const endQtr = systemInfo?.endQtrYYYYQ || "20222";
   const quarters = quartersNewRange(startQtr, endQtr);
 
   const navigate = useNavigate();
