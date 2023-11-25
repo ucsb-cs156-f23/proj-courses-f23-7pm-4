@@ -10,6 +10,9 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { threeSections } from "fixtures/sectionFixtures";
 import { allTheSubjects } from "fixtures/subjectFixtures";
 import userEvent from "@testing-library/user-event";
+// import SectionsTable from "/Users/ericmarzouk/Desktop/cs156/proj-courses-f23-7pm-4/frontend/src/main/components/Sections/SectionsTable.js"
+import SectionsTable from "main/components/Sections/SectionsTable";
+import { fiveSections, gigaSections } from "fixtures/sectionFixtures";
 
 const mockToast = jest.fn();
 jest.mock("react-toastify", () => {
@@ -89,4 +92,46 @@ describe("CourseOverTimeInstructorIndexPage tests", () => {
 
     expect(screen.getByText("ECE 1A")).toBeInTheDocument();
   });
+
+  test("No +/- is displayed for dropdown", async () => {
+    axiosMock.onGet("/api/UCSBSubjects/all").reply(200, allTheSubjects);
+    axiosMock
+      .onGet("/api/public/courseovertime/instructorsearch")
+      .reply(200, threeSections);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <CourseOverTimeInstructorIndexPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const selectStartQuarter = screen.getByLabelText("Start Quarter");
+    userEvent.selectOptions(selectStartQuarter, "20222");
+    const selectEndQuarter = screen.getByLabelText("End Quarter");
+    userEvent.selectOptions(selectEndQuarter, "20222");
+    const enterInstructor = screen.getByLabelText("Instructor Name");
+    userEvent.type(enterInstructor, "CONRAD");
+    const selectCheckbox = screen.getByTestId(
+      "CourseOverTimeInstructorSearchForm-checkbox",
+    );
+    userEvent.click(selectCheckbox);
+
+    const submitButton = screen.getByText("Submit");
+    expect(submitButton).toBeInTheDocument();
+    userEvent.click(submitButton);
+
+    axiosMock.resetHistory();
+
+    await waitFor(() => {
+      expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1);
+    });
+
+    expect(screen.getByText("ECE 1A")).toBeInTheDocument();
+    expect(screen.queryByText("➖")).not.toBeInTheDocument();
+    expect(screen.queryByText("➕")).not.toBeInTheDocument();
+  });
+
+  
 });

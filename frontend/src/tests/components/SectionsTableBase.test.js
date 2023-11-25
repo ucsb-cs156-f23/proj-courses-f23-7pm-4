@@ -150,7 +150,7 @@ describe("SectionsTableBase tests", () => {
     );
   });
 
-  test("when on Instructor Search Page, No +/- is displayed for dropdown", () => {
+  test("when canExpand set to false, no dropdown buttons are displayed, ", () => {
     render(
       <SectionsTableBase
         columns={columns}
@@ -162,4 +162,6 @@ describe("SectionsTableBase tests", () => {
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
     expect(screen.queryByText("➕")).not.toBeInTheDocument();
   });
+
+
 });
