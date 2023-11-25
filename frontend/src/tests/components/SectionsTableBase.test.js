@@ -162,6 +162,4 @@ describe("SectionsTableBase tests", () => {
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
     expect(screen.queryByText("➕")).not.toBeInTheDocument();
   });
-
-
 });

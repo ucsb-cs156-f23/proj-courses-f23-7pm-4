@@ -129,6 +129,4 @@ describe("CourseOverTimeInstructorIndexPage tests", () => {
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
     expect(screen.queryByText("➕")).not.toBeInTheDocument();
   });
-
-  
 });
