@@ -10,9 +10,6 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { threeSections } from "fixtures/sectionFixtures";
 import { allTheSubjects } from "fixtures/subjectFixtures";
 import userEvent from "@testing-library/user-event";
-// import SectionsTable from "/Users/ericmarzouk/Desktop/cs156/proj-courses-f23-7pm-4/frontend/src/main/components/Sections/SectionsTable.js"
-import SectionsTable from "main/components/Sections/SectionsTable";
-import { fiveSections, gigaSections } from "fixtures/sectionFixtures";
 
 const mockToast = jest.fn();
 jest.mock("react-toastify", () => {
