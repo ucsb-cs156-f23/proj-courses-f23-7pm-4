@@ -2,9 +2,13 @@ import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import { useBackend } from "main/utils/useBackend";
 import CourseDetailsTable from "main/components/Courses/CourseDetailsTable";
 import { useParams } from "react-router-dom";
+import { qyyToYyyyq } from "main/utils/quarterUtilities.js";
 
 export default function CourseDetailsPage() {
-  const { yyyyq, enrollCd } = useParams();
+  const { qyy, enrollCd } = useParams();
+  const yyyyq = qyyToYyyyq(qyy.toString());
+  
+  console.log(yyyyq);
 
   const { data: personalSection } = useBackend(
     // Stryker disable all : hard to test for query caching

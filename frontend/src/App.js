@@ -83,7 +83,7 @@ function App() {
             />
             <Route
               exact
-              path="/coursedetails/:yyyyq/:enrollCd"
+              path="/coursedetails/:qyy/:enrollCd"
               element={<CourseDetailsPage />}
             />
           </>

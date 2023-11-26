@@ -1,5 +1,6 @@
 import SectionsTableBase from "main/components/SectionsTableBase";
-
+import { ButtonColumn } from "main/components/OurTable";
+import { useNavigate } from "react-router-dom";
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 import {
   convertToFraction,
@@ -17,6 +18,11 @@ function getFirstVal(values) {
 export default function SectionsTable({ sections, canExpand = true }) {
   // Stryker enable all
   // Stryker disable BooleanLiteral
+  const navigate = useNavigate();
+  const detailsCallback = (cell) => {
+    navigate(`/coursedetails/${cell.row.values.quarter}/${cell.row.values.enrollCode}`);
+  };
+
   const columns = [
     {
       Header: "Quarter",
@@ -30,7 +36,7 @@ export default function SectionsTable({ sections, canExpand = true }) {
     {
       Header: "Course ID",
       accessor: "courseInfo.courseId",
-
+      disableGroupBy: true,
       Cell: ({ cell: { value } }) => value.substring(0, value.length - 2),
     },
     {
@@ -97,6 +103,7 @@ export default function SectionsTable({ sections, canExpand = true }) {
     {
       Header: "Enroll Code",
       accessor: "section.enrollCode",
+      id: "enrollCode",
       disableGroupBy: true,
 
       aggregate: getFirstVal,
@@ -106,7 +113,17 @@ export default function SectionsTable({ sections, canExpand = true }) {
 
   const testid = "SectionsTable";
 
-  const columnsToDisplay = columns;
+  const buttonColumns = [
+    ...columns,
+    ButtonColumn(
+      "ⓘ",
+      "primary",
+      detailsCallback,
+      "SectionsTable",
+    ),
+  ];
+
+  const columnsToDisplay = buttonColumns;
 
   return (
     <SectionsTableBase
