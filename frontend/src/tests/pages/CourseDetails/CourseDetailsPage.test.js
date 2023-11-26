@@ -14,7 +14,7 @@ jest.mock("react-router-dom", () => {
     __esModule: true,
     ...originalModule,
     useParams: () => ({
-      yyyyq: 20221,
+      qyy: "W22",
       enrollCd: 12583,
     }),
     Navigate: (x) => {
@@ -128,7 +128,7 @@ describe("CourseDetailsPage tests", () => {
     ).toHaveTextContent("ECE 1A");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-quarter`),
-    ).toHaveTextContent("20221");
+    ).toHaveTextContent("W22");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
     ).toHaveTextContent("12583");
