@@ -140,12 +140,14 @@
                     </execution>
                     <execution>
                         <id>validate-the-git-infos</id>
-                        <!-- <goals>
+                        <goals>
                             <goal>validateRevision</goal>
-                        </goals> -->
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <dotGitDirectory>${project.basedir}/submodule_directory/.git</dotGitDirectory>
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
                 </configuration>
             </plugin>
