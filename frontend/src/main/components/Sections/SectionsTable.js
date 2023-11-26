@@ -20,7 +20,9 @@ export default function SectionsTable({ sections, canExpand = true }) {
   // Stryker disable BooleanLiteral
   const navigate = useNavigate();
   const detailsCallback = (cell) => {
-    navigate(`/coursedetails/${cell.row.values.quarter}/${cell.row.values.enrollCode}`);
+    navigate(
+      `/coursedetails/${cell.row.values.quarter}/${cell.row.values.enrollCode}`,
+    );
   };
 
   const columns = [
@@ -115,12 +117,7 @@ export default function SectionsTable({ sections, canExpand = true }) {
 
   const buttonColumns = [
     ...columns,
-    ButtonColumn(
-      "ⓘ",
-      "primary",
-      detailsCallback,
-      "SectionsTable",
-    ),
+    ButtonColumn("ⓘ", "primary", detailsCallback, "SectionsTable"),
   ];
 
   const columnsToDisplay = buttonColumns;

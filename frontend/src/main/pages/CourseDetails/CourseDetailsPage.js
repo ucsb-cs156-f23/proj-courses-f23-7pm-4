@@ -7,8 +7,6 @@ import { qyyToYyyyq } from "main/utils/quarterUtilities.js";
 export default function CourseDetailsPage() {
   const { qyy, enrollCd } = useParams();
   const yyyyq = qyyToYyyyq(qyy.toString());
-  
-  console.log(yyyyq);
 
   const { data: personalSection } = useBackend(
     // Stryker disable all : hard to test for query caching
