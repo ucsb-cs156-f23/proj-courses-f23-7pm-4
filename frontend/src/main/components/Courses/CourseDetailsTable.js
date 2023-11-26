@@ -9,7 +9,8 @@ export default function CourseDetailsTable({ course }) {
     },
     {
       Header: "Quarter",
-      accessor: "quarter",
+      accessor: (row, _rowIndex) => yyyyqToQyy(row.quarter),
+      id: "quarter",
     },
     {
       Header: "Enroll Code",
