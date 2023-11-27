@@ -883,7 +883,7 @@ export const fiveSections = [
       classClosed: null,
       courseCancelled: null,
       gradingOptionCode: null,
-      enrolledTotal: 85,
+      enrolledTotal: 80,
       maxEnroll: 80,
       secondaryStatus: "R",
       departmentApprovalRequired: false,
