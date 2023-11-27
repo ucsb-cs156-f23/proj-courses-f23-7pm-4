@@ -133,5 +133,24 @@ describe("CourseDetailsPage tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-title`),
     ).toHaveTextContent("COMP ENGR SEMINAR");
+    expect(
+      screen.queryByText("Error: Invalid Quarter or Enroll Code"),
+    ).not.toBeInTheDocument();
+  });
+  test("displays error page for invalid quarter/enrollcode", async () => {
+    setupAdminUser();
+    const queryClient = new QueryClient();
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={["/20221/12583"]}>
+          <Routes>
+            <Route path="/:qyy/:enrollCd" element={<CourseDetailsPage />} />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+    const errorMessage = "Error: Invalid Quarter or Enroll Code";
+    await screen.findByText(errorMessage);
+    expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });
 });
