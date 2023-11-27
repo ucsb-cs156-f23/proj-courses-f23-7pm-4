@@ -38,6 +38,7 @@ describe("Section tests", () => {
       "Course ID",
       "Title",
       "Enrolled",
+      "Status",
       "Location",
       "Days",
       "Time",
@@ -49,6 +50,7 @@ describe("Section tests", () => {
       "courseInfo.courseId",
       "courseInfo.title",
       "enrolled",
+      "status",
       "location",
       "days",
       "time",
@@ -106,6 +108,7 @@ describe("Section tests", () => {
       "Course ID",
       "Title",
       "Enrolled",
+      "Status",
       "Location",
       "Days",
       "Time",
@@ -117,6 +120,7 @@ describe("Section tests", () => {
       "courseInfo.courseId",
       "courseInfo.title",
       "enrolled",
+      "status",
       "location",
       "days",
       "time",
@@ -152,6 +156,9 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-enrolled`),
     ).toHaveTextContent("84/100");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-status`),
+    ).toHaveTextContent("Open");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-location`),
     ).toHaveTextContent("BUCHN 1930");
