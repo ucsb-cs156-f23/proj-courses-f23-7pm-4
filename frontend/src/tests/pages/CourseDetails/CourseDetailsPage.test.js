@@ -109,15 +109,15 @@ describe("CourseDetailsPage tests", () => {
         ],
       });
 
-      render(
-        <QueryClientProvider client={queryClient}>
-          <MemoryRouter initialEntries={["/W22/12583"]}>
-            <Routes>
-              <Route path="/:qyy/:enrollCd" element={<CourseDetailsPage />} />
-            </Routes>
-          </MemoryRouter>
-        </QueryClientProvider>,
-      );
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={["/W22/12583"]}>
+          <Routes>
+            <Route path="/:qyy/:enrollCd" element={<CourseDetailsPage />} />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
 
     await screen.findByTestId(`${testId}-cell-row-0-col-courseId`);
 
