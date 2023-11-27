@@ -22,7 +22,7 @@ export default function CourseDetailsPage() {
     <BasicLayout>
       <div className="pt-2">
         <h1>Course Details Placeholder Page</h1>
-        {personalSection && !personalSection?.error ? (
+        {personalSection && !personalSection.error ? (
           <CourseDetailsTable course={[personalSection]} />
         ) : (
           <div>Error: Invalid Quarter or Enroll Code</div>
