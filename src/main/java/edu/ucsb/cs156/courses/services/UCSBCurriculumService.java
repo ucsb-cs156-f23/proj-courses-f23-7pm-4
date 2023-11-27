@@ -282,7 +282,7 @@ public class UCSBCurriculumService {
 
     HttpEntity<String> entity = new HttpEntity<>("body", headers);
 
-    String params = String.format("?quarter=%s&enrollcode=%s", quarter, enrollCode);
+    String params = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
 
     String url = FINALS_ENDPOINT + params;
 
