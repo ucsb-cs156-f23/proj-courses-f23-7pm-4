@@ -144,6 +144,9 @@ describe("Section tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-quarter`),
     ).toHaveTextContent("W22");
     expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-isSection`),
+    ).toHaveTextContent("No");
+    expect(
       screen.getByTestId(`${testId}-cell-row-0-col-time`),
     ).toHaveTextContent("3:00 PM - 3:50 PM");
     expect(
@@ -202,14 +205,16 @@ describe("Section tests", () => {
 
     const testId = "SectionsTable";
 
-    const expandRow = screen.getByTestId(
-      `${testId}-cell-row-1-col-courseInfo.courseId-expand-symbols`,
-    );
-    fireEvent.click(expandRow);
-
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-enrolled`),
     ).toHaveTextContent("84/80");
+
+    const expandRow = screen.getByTestId(
+      `${testId}-cell-row-1-col-courseInfo.courseId-expand-symbols`,
+    );
+    
+    fireEvent.click(expandRow);
+
     expect(
       screen.getByTestId(`${testId}-cell-row-2-col-enrolled`),
     ).toHaveTextContent("21/21");

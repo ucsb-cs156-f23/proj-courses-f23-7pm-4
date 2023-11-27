@@ -42,11 +42,12 @@ export default function SectionsTable({ sections, canExpand = true }) {
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
-      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
       Header: "Is Section?",
-      accessor: (row) => isSection(row.section.section),
-      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
+      accessor: (row) => isSection(row.section.section) ? "Yes" : "No",
       id: "isSection",
+
+      aggregate: getFirstVal,
+      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Enrolled",

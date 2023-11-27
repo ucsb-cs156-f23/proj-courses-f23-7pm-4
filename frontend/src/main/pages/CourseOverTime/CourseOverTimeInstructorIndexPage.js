@@ -40,7 +40,7 @@ export default function CourseOverTimeInstructorIndexPage() {
         <CourseOverTimeInstructorSearchForm
           fetchJSON={fetchCourseOverTimeJSON}
         />
-        <SectionsTable sections={courseJSON} canExpand={false} />
+        <SectionsTable sections={courseJSON} />
       </div>
     </BasicLayout>
   );

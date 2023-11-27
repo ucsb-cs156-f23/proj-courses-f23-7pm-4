@@ -90,7 +90,7 @@ describe("CourseOverTimeInstructorIndexPage tests", () => {
     expect(screen.getByText("ECE 1A")).toBeInTheDocument();
   });
 
-  test("No +/- is displayed for dropdown", async () => {
+  test("+/- is displayed for dropdown and works", async () => {
     axiosMock.onGet("/api/UCSBSubjects/all").reply(200, allTheSubjects);
     axiosMock
       .onGet("/api/public/courseovertime/instructorsearch")
@@ -127,6 +127,12 @@ describe("CourseOverTimeInstructorIndexPage tests", () => {
 
     expect(screen.getByText("ECE 1A")).toBeInTheDocument();
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
+    expect(screen.queryByText("➕")).toBeInTheDocument();
+
+    const expandButton = screen.getByText("➕");
+    userEvent.click(expandButton);
+
+    expect(screen.queryByText("➖")).toBeInTheDocument();
     expect(screen.queryByText("➕")).not.toBeInTheDocument();
   });
 });
