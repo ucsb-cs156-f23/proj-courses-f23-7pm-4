@@ -68,7 +68,7 @@ export default function SectionsOverTimeTable({ sections }) {
     },
     {
       Header: "Status",
-      accessor: (row) => formatStatus(row.status),
+      accessor: (row) => formatStatus(row.section),
       disableGroupBy: true,
       id: "status",
 
