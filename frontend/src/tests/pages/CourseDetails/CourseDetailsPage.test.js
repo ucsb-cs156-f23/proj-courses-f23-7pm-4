@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
@@ -13,10 +13,6 @@ jest.mock("react-router-dom", () => {
   return {
     __esModule: true,
     ...originalModule,
-    useParams: () => ({
-      qyy: "W22",
-      enrollCd: 12583,
-    }),
     Navigate: (x) => {
       mockNavigate(x);
       return null;
@@ -113,13 +109,15 @@ describe("CourseDetailsPage tests", () => {
         ],
       });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <CourseDetailsPage />
-        </MemoryRouter>
-      </QueryClientProvider>,
-    );
+      render(
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter initialEntries={["/W22/12583"]}>
+            <Routes>
+              <Route path="/:qyy/:enrollCd" element={<CourseDetailsPage />} />
+            </Routes>
+          </MemoryRouter>
+        </QueryClientProvider>,
+      );
 
     await screen.findByTestId(`${testId}-cell-row-0-col-courseId`);
 
