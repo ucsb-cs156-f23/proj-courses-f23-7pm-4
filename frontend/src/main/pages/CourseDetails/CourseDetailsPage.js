@@ -17,7 +17,7 @@ export default function CourseDetailsPage() {
       url: `/api/sections/sectionsearch?qtr=${yyyyq}&enrollCode=${enrollCd}`,
     },
   );
-
+  // Stryker restore all
   return (
     <BasicLayout>
       <div className="pt-2">

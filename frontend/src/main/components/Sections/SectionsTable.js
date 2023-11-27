@@ -16,8 +16,6 @@ function getFirstVal(values) {
 }
 
 export default function SectionsTable({ sections, canExpand = true }) {
-  // Stryker enable all
-  // Stryker disable BooleanLiteral
   const navigate = useNavigate();
   const detailsCallback = (cell) => {
     navigate(
