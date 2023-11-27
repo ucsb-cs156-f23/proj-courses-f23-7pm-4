@@ -5,6 +5,7 @@ import AdminUsersPage from "main/pages/AdminUsersPage";
 import AdminLoadSubjectsPage from "main/pages/AdminLoadSubjectsPage";
 import AdminPersonalSchedulesPage from "main/pages/AdminPersonalSchedulePage";
 import AdminJobsPage from "main/pages/AdminJobsPage";
+import DeveloperPage from "main/pages/DeveloperPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -17,6 +18,7 @@ import PersonalSchedulesEditPage from "main/pages/PersonalSchedules/PersonalSche
 import PersonalSchedulesDetailsPage from "main/pages/PersonalSchedules/PersonalSchedulesDetailsPage";
 import SectionSearchesIndexPage from "main/pages/SectionSearches/SectionSearchesIndexPage";
 
+import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
 import CoursesIndexPage from "main/pages/Courses/PSCourseIndexPage";
 import CoursesCreatePage from "main/pages/Courses/PSCourseCreatePage";
 
@@ -47,6 +49,7 @@ function App() {
               element={<AdminPersonalSchedulesPage />}
             />
             <Route path="/admin/jobs" element={<AdminJobsPage />} />
+            <Route path="/developer" element={<DeveloperPage />} />
           </>
         )}
         {hasRole(currentUser, "ROLE_USER") && (
@@ -77,6 +80,11 @@ function App() {
               exact
               path="/personalschedules/details/:id"
               element={<PersonalSchedulesDetailsPage />}
+            />
+            <Route
+              exact
+              path="/coursedetails/:qyy/:enrollCd"
+              element={<CourseDetailsPage />}
             />
           </>
         )}
