@@ -229,7 +229,7 @@ describe("Section tests", () => {
     ).toHaveTextContent("21/21");
   });
 
-  test("Test all course statuses", () => {
+  test("all course statuses", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>

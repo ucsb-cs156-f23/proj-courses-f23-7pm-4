@@ -221,7 +221,7 @@ describe("Section tests", () => {
       screen.getByTestId(`${testId}-cell-row-2-col-enrolled`),
     ).toHaveTextContent("21/21");
   });
-  test("Test all course statuses", () => {
+  test("all course statuses", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
