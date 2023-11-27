@@ -27,7 +27,6 @@ export default function SectionsTable({ sections, canExpand = true }) {
     {
       Header: "Quarter",
       accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
-      disableGroupBy: true,
       id: "quarter",
 
       aggregate: getFirstVal,
@@ -36,13 +35,11 @@ export default function SectionsTable({ sections, canExpand = true }) {
     {
       Header: "Course ID",
       accessor: "courseInfo.courseId",
-      disableGroupBy: true,
       Cell: ({ cell: { value } }) => value.substring(0, value.length - 2),
     },
     {
       Header: "Title",
       accessor: "courseInfo.title",
-      disableGroupBy: true,
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
@@ -58,7 +55,6 @@ export default function SectionsTable({ sections, canExpand = true }) {
       Header: "Enrolled",
       accessor: (row) =>
         convertToFraction(row.section.enrolledTotal, row.section.maxEnroll),
-      disableGroupBy: true,
       id: "enrolled",
 
       aggregate: getFirstVal,
@@ -67,7 +63,6 @@ export default function SectionsTable({ sections, canExpand = true }) {
     {
       Header: "Location",
       accessor: (row) => formatLocation(row.section.timeLocations),
-      disableGroupBy: true,
       id: "location",
 
       aggregate: getFirstVal,
@@ -76,7 +71,6 @@ export default function SectionsTable({ sections, canExpand = true }) {
     {
       Header: "Days",
       accessor: (row) => formatDays(row.section.timeLocations),
-      disableGroupBy: true,
       id: "days",
 
       aggregate: getFirstVal,
@@ -85,7 +79,6 @@ export default function SectionsTable({ sections, canExpand = true }) {
     {
       Header: "Time",
       accessor: (row) => formatTime(row.section.timeLocations),
-      disableGroupBy: true,
       id: "time",
 
       aggregate: getFirstVal,
@@ -94,7 +87,6 @@ export default function SectionsTable({ sections, canExpand = true }) {
     {
       Header: "Instructor",
       accessor: (row) => formatInstructors(row.section.instructors),
-      disableGroupBy: true,
       id: "instructor",
 
       aggregate: getFirstVal,
@@ -104,7 +96,6 @@ export default function SectionsTable({ sections, canExpand = true }) {
       Header: "Enroll Code",
       accessor: "section.enrollCode",
       id: "enrollCode",
-      disableGroupBy: true,
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
