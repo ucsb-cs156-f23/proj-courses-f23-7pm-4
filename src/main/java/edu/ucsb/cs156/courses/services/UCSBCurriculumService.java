@@ -272,7 +272,7 @@ public class UCSBCurriculumService {
     return retVal;
   }
 
-  public String getFinalsJSON(String enrollCode, String quarter) {
+  public String getFinalsJSON(String quarter, String enrollCode) {
 
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -297,7 +297,11 @@ public class UCSBCurriculumService {
       statusCode = re.getStatusCode();
       retVal = re.getBody();
     } catch (HttpClientErrorException e) {
-      retVal = "{\"error\": \"401: Unauthorized\"}";
+      if (e.getStatusCode().equals(HttpStatus.BAD_REQUEST)) {
+        retVal = "{\"error\": \"400: Bad Request\"}";
+      } else if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
+        retVal = "{\"error\": \"401: Unauthorized\"}";
+      }
     }
     log.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
     return retVal;
