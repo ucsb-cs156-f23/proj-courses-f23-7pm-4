@@ -1,11 +1,13 @@
 package edu.ucsb.cs156.courses.controllers;
 
+import edu.ucsb.cs156.courses.entities.FinalsInfo;
 import edu.ucsb.cs156.courses.repositories.FinalsInfoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +22,9 @@ public class FinalsInfoController extends ApiController {
   @Autowired private FinalsInfoRepository finalsInfoRepository;
 
   @GetMapping("")
+  @PreAuthorize("hasRole('ROLE_USER')")
   @Operation(summary = "Get finals information for a specific course")
-  public void getFinalsInfo(
+  public FinalsInfo getFinalsInfo(
       @Parameter(
               name = "quarter",
               description = "Quarter identifier, e.g., 'f23' for Fall 2023",
@@ -35,5 +38,10 @@ public class FinalsInfoController extends ApiController {
               example = "12345",
               required = true)
           @RequestParam
-          String enrollCd) {}
+          String enrollCd) {
+    // FinalsInfo finalsInfo = getFinalsInfo(quarter, enrollCd)
+    //     .orElseThrow(() -> new EntityNotFoundException(FinalsInfo.class, quarter, enrollCd));
+    // return finalsInfo;
+    return null;
+  }
 }
