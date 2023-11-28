@@ -35,8 +35,28 @@ describe("CourseDetailsTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = ["Course ID", "Quarter", "Title", "Enrolled", "Location", "Days", "Time", "Instructor", "Enroll Code"];
-    const expectedFields = ["courseId", "quarter", "title", "enrolledTotal", "building", "days", "time", "instructor", "enrollCode"];
+    const expectedHeaders = [
+      "Course ID",
+      "Quarter",
+      "Title",
+      "Enrolled",
+      "Location",
+      "Days",
+      "Time",
+      "Instructor",
+      "Enroll Code",
+    ];
+    const expectedFields = [
+      "courseId",
+      "quarter",
+      "title",
+      "enrolledTotal",
+      "building",
+      "days",
+      "time",
+      "instructor",
+      "enrollCode",
+    ];
     const testId = "CourseDetailsTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -76,6 +96,5 @@ describe("CourseDetailsTable tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
     ).toHaveTextContent("12583");
-
   });
 });
