@@ -96,4 +96,48 @@ describe("JobsTable tests", () => {
       screen.getByTestId(`JobsTable-cell-row-0-col-Log`),
     ).toHaveTextContent(expectedLogContent);
   });
+
+  test("Does not add ellipsis when logLines.length is less than or equal to 10", () => {
+    const shortLog = Array.from(
+      { length: 10 },
+      (_, index) => `Line ${index + 1}`,
+    ).join("");
+    const jobsWithShortLog = [{ ...jobsFixtures.sixJobs[0], log: shortLog }];
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <JobsTable jobs={jobsWithShortLog} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const expectedLogContent = shortLog;
+    expect(
+      screen.getByTestId(`JobsTable-cell-row-0-col-Log`),
+    ).toHaveTextContent(expectedLogContent);
+  });
+
+  // Add a test for the exact format of the output
+  test("Renders the log text with newline characters and ellipsis when it exceeds 10 lines", () => {
+    const longLog = Array.from(
+      { length: 15 },
+      (_, index) => `Line ${index + 1}`,
+    ).join("\n");
+    const jobsWithLongLog = [{ ...jobsFixtures.sixJobs[0], log: longLog }];
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <JobsTable jobs={jobsWithLongLog} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const expectedLogContent =
+      "Line 1Line 2Line 3Line 4Line 5Line 6Line 7Line 8Line 9Line 10...";
+    expect(
+      screen.getByTestId(`JobsTable-cell-row-0-col-Log`),
+    ).toHaveTextContent(expectedLogContent);
+  });
 });
