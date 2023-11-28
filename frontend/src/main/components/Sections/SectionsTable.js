@@ -7,7 +7,6 @@ import {
   formatInstructors,
   formatLocation,
   formatTime,
-  isSection,
   formatStatus,
 } from "main/utils/sectionUtils.js";
 
@@ -43,9 +42,9 @@ export default function SectionsTable({ sections, canExpand = true }) {
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
-      Header: "Is Section?",
-      accessor: (row) => isSection(row.section.section) ? "Yes" : "No",
-      id: "isSection",
+      Header: "Section Number",
+      accessor: (row) => row.section.section,
+      id: "sectionNumber",
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,

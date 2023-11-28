@@ -107,6 +107,7 @@ describe("Section tests", () => {
       "Quarter",
       "Course ID",
       "Title",
+      "Section Number",
       "Enrolled",
       "Status",
       "Location",
@@ -119,6 +120,7 @@ describe("Section tests", () => {
       "quarter",
       "courseInfo.courseId",
       "courseInfo.title",
+      "sectionNumber",
       "enrolled",
       "status",
       "location",
@@ -148,8 +150,8 @@ describe("Section tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-quarter`),
     ).toHaveTextContent("W22");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-isSection`),
-    ).toHaveTextContent("No");
+      screen.getByTestId(`${testId}-cell-row-0-col-sectionNumber`),
+    ).toHaveTextContent("0100");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-time`),
     ).toHaveTextContent("3:00 PM - 3:50 PM");
