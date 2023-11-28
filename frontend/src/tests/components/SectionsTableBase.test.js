@@ -11,7 +11,7 @@ import {
   formatDays,
   formatInstructors,
   formatLocation,
-  formatTime
+  formatTime,
 } from "main/utils/sectionUtils.js";
 
 describe("SectionsTableBase tests", () => {
@@ -47,7 +47,7 @@ describe("SectionsTableBase tests", () => {
       Header: "Section Number",
       accessor: (row) => row.section.section,
       id: "sectionNumber",
-      
+
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
