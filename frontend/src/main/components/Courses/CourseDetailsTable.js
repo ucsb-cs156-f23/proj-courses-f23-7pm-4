@@ -17,27 +17,32 @@ export default function CourseDetailsTable({ course }) {
     },
     {
       Header: "Enrolled",
-      accessor: "classSections[1].enrolled",
+      accessor: row => row.classSections[0].enrolledTotal,
+      id: "enrolledTotal"
     },
     {
       Header: "Location",
-      accessor: "location",
+      accessor: row => row.classSections[0].timeLocations[0].building,
+      id: "building"
     },
     {
       Header: "Days",
-      accessor: "days",
+      accessor: row => row.classSections[0].timeLocations[0].days,
+      id: "days"
     },
     {
       Header: "Time",
-      accessor: "time",
+      accessor: row => row.classSections[0].timeLocations[0].beginTime + "-" + row.classSections[0].timeLocations[0].endTime,
+      id: "time"
     },
     {
       Header: "Instructor",
-      accessor: "instructor",
+      accessor: row => row.classSections[0].instructors[0].instructor,
+      id: "instructor"
     },
     {
       Header: "Enroll Code",
-      accessor: "classSections[0].enrollCode",
+      accessor: row => row.classSections[0].enrollCode,
       id: "enrollCode",
     }
   ];
