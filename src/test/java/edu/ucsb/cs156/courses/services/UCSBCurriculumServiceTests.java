@@ -433,10 +433,7 @@ public class UCSBCurriculumServiceTests {
     String quarter = "20221";
     String enrollCode = "59501";
 
-    String expectedParams =
-        String.format(
-            "?quarter=%s&enrollCode=%s",
-            quarter, enrollCode);
+    String expectedParams = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
 
     String expectedURL = UCSBCurriculumService.FINALS_ENDPOINT + expectedParams;
 
@@ -444,7 +441,7 @@ public class UCSBCurriculumServiceTests {
         .expect(requestTo(expectedURL))
         .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
         .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
-        .andExpect(header("ucsb-api-version","3.0"))
+        .andExpect(header("ucsb-api-version", "3.0"))
         .andExpect(header("ucsb-api-key", apiKey))
         .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
 
@@ -459,7 +456,8 @@ public class UCSBCurriculumServiceTests {
     String quarter = "20221";
     String enrollCode = "59501";
 
-    String expectedURL = "https://api.ucsb.edu/academics/curriculums/v3/finals?quarter=20221&enrollCode=59501";
+    String expectedURL =
+        "https://api.ucsb.edu/academics/curriculums/v3/finals?quarter=20221&enrollCode=59501";
 
     this.mockRestServiceServer
         .expect(requestTo(expectedURL))
@@ -470,7 +468,7 @@ public class UCSBCurriculumServiceTests {
         .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
 
     String result = ucs.getFinalsJSON(quarter, enrollCode);
-    
+
     assertEquals(expectedResult, result);
   }
 
@@ -481,10 +479,7 @@ public class UCSBCurriculumServiceTests {
     String quarter = "20221";
     String enrollCode = "59501";
 
-    String expectedParams =
-        String.format(
-            "?quarter=%s&enrollCode=%s",
-            quarter, enrollCode);
+    String expectedParams = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
 
     String expectedURL = UCSBCurriculumService.FINALS_ENDPOINT + expectedParams;
 
@@ -512,10 +507,7 @@ public class UCSBCurriculumServiceTests {
     String quarter = "20221";
     String enrollCode = "59501";
 
-    String expectedParams =
-        String.format(
-            "?quarter=%s&enrollCode=%s",
-            quarter, enrollCode);
+    String expectedParams = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
     String expectedURL = UCSBCurriculumService.FINALS_ENDPOINT + expectedParams;
 
     this.mockRestServiceServer
@@ -538,10 +530,7 @@ public class UCSBCurriculumServiceTests {
     String enrollCode = "08260";
     String quarter = "0000";
 
-    String expectedParams =
-        String.format(
-            "?quarter=%s&enrollCode=%s",
-            quarter, enrollCode);
+    String expectedParams = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
 
     String expectedURL = UCSBCurriculumService.FINALS_ENDPOINT + expectedParams;
 
@@ -556,5 +545,4 @@ public class UCSBCurriculumServiceTests {
     String result = ucs.getFinalsJSON(quarter, enrollCode);
     assertEquals(expectedResult, result);
   }
-
 }

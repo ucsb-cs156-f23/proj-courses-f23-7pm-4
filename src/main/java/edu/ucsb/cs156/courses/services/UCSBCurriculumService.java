@@ -305,5 +305,4 @@ public class UCSBCurriculumService {
     log.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
     return retVal;
   }
-  
 }

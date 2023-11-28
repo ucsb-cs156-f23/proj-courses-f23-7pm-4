@@ -13,6 +13,5 @@ public class FinalsFixtures {
     }
       """;
 
-  public static final String NO_FINAL =
-      "null";
+  public static final String NO_FINAL = "null";
 }
