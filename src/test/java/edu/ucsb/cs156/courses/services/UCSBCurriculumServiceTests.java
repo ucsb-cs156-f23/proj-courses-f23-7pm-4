@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withBadRequest;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withUnauthorizedRequest;
 
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ucsb.cs156.courses.documents.ConvertedSection;
 import edu.ucsb.cs156.courses.documents.CoursePageFixtures;
+import edu.ucsb.cs156.courses.documents.FinalsFixtures;
 import edu.ucsb.cs156.courses.documents.PersonalSectionsFixtures;
 import edu.ucsb.cs156.courses.documents.SectionFixtures;
 import java.util.List;
@@ -421,6 +423,126 @@ public class UCSBCurriculumServiceTests {
         .andRespond(withSuccess("null", MediaType.APPLICATION_JSON));
 
     String result = ucs.getAllSections(enrollCode, quarter);
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
+  public void test_getFinals_success() throws Exception {
+    String expectedResult = "{expectedResult}";
+
+    String quarter = "20221";
+    String enrollCode = "59501";
+
+    String expectedParams = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
+
+    String expectedURL = UCSBCurriculumService.FINALS_ENDPOINT + expectedParams;
+
+    this.mockRestServiceServer
+        .expect(requestTo(expectedURL))
+        .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("ucsb-api-version", "3.0"))
+        .andExpect(header("ucsb-api-key", apiKey))
+        .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
+
+    String result = ucs.getFinalsJSON(quarter, enrollCode);
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
+  public void test_getFinalsbyQtrEnrollCd_success() throws Exception {
+    String expectedResult = FinalsFixtures.ONE_FINAL;
+
+    String quarter = "20221";
+    String enrollCode = "59501";
+
+    String expectedURL =
+        "https://api.ucsb.edu/academics/curriculums/v3/finals?quarter=20221&enrollCode=59501";
+
+    this.mockRestServiceServer
+        .expect(requestTo(expectedURL))
+        .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("ucsb-api-version", "3.0"))
+        .andExpect(header("ucsb-api-key", apiKey))
+        .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
+
+    String result = ucs.getFinalsJSON(quarter, enrollCode);
+
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
+  public void test_getFinals_success_input() throws Exception {
+    String expectedResult = "{expectedResult}";
+
+    String quarter = "20221";
+    String enrollCode = "59501";
+
+    String expectedParams = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
+
+    String expectedURL = UCSBCurriculumService.FINALS_ENDPOINT + expectedParams;
+
+    this.mockRestServiceServer
+        .expect(requestTo(expectedURL))
+        .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("ucsb-api-version", "3.0"))
+        .andExpect(header("ucsb-api-key", apiKey))
+        .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
+
+    String result = ucs.getFinalsJSON(quarter, enrollCode);
+
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
+  public void test_getFinals_exception() throws Exception {
+    String expectedResult = "{\"error\": \"400: Bad Request\"}";
+
+    when(restTemplate.exchange(
+            any(String.class), eq(HttpMethod.GET), any(HttpEntity.class), eq(String.class)))
+        .thenThrow(HttpClientErrorException.class);
+
+    String quarter = "20221";
+    String enrollCode = "59501";
+
+    String expectedParams = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
+    String expectedURL = UCSBCurriculumService.FINALS_ENDPOINT + expectedParams;
+
+    this.mockRestServiceServer
+        .expect(requestTo(expectedURL))
+        .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("ucsb-api-version", "3.0"))
+        .andExpect(header("ucsb-api-key", apiKey))
+        .andRespond(withUnauthorizedRequest());
+
+    String result = ucs.getFinalsJSON(quarter, enrollCode);
+
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
+  public void test_getFinal_not_found() throws Exception {
+    String expectedResult = "{\"error\": \"400: Bad Request\"}";
+
+    String enrollCode = "08260";
+    String quarter = "0000";
+
+    String expectedParams = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
+
+    String expectedURL = UCSBCurriculumService.FINALS_ENDPOINT + expectedParams;
+
+    this.mockRestServiceServer
+        .expect(requestTo(expectedURL))
+        .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+        .andExpect(header("ucsb-api-version", "3.0"))
+        .andExpect(header("ucsb-api-key", apiKey))
+        .andRespond(withBadRequest());
+
+    String result = ucs.getFinalsJSON(quarter, enrollCode);
     assertEquals(expectedResult, result);
   }
 }
