@@ -42,6 +42,7 @@ describe("Section tests", () => {
       "Course ID",
       "Title",
       "Enrolled",
+      "Status",
       "Location",
       "Days",
       "Time",
@@ -53,6 +54,7 @@ describe("Section tests", () => {
       "courseInfo.courseId",
       "courseInfo.title",
       "enrolled",
+      "status",
       "location",
       "days",
       "time",
@@ -113,6 +115,7 @@ describe("Section tests", () => {
       "Course ID",
       "Title",
       "Enrolled",
+      "Status",
       "Location",
       "Days",
       "Time",
@@ -124,6 +127,7 @@ describe("Section tests", () => {
       "courseInfo.courseId",
       "courseInfo.title",
       "enrolled",
+      "status",
       "location",
       "days",
       "time",
@@ -223,5 +227,35 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-2-col-enrolled`),
     ).toHaveTextContent("21/21");
+  });
+
+  test("all course statuses", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SectionsOverTimeTable sections={fiveSections} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const testId = "SectionsOverTimeTable";
+
+    const expandRow = screen.getByTestId(
+      `${testId}-cell-row-1-col-quarter-expand-symbols`,
+    );
+    fireEvent.click(expandRow);
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-status`),
+    ).toHaveTextContent("Full");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-status`),
+    ).toHaveTextContent("Closed");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-status`),
+    ).toHaveTextContent("Cancelled");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-3-col-status`),
+    ).toHaveTextContent("Open");
   });
 });

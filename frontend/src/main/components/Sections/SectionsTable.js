@@ -9,6 +9,7 @@ import {
   formatLocation,
   formatTime,
   isSection,
+  formatStatus,
 } from "main/utils/sectionUtils.js";
 
 function getFirstVal(values) {
@@ -56,6 +57,15 @@ export default function SectionsTable({ sections, canExpand = true }) {
       accessor: (row) =>
         convertToFraction(row.section.enrolledTotal, row.section.maxEnroll),
       id: "enrolled",
+
+      aggregate: getFirstVal,
+      Aggregated: ({ cell: { value } }) => `${value}`,
+    },
+    {
+      Header: "Status",
+      accessor: (row) => formatStatus(row.section),
+      disableGroupBy: true,
+      id: "status",
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
