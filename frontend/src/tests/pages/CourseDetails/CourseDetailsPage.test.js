@@ -14,8 +14,8 @@ jest.mock("react-router-dom", () => {
     __esModule: true,
     ...originalModule,
     useParams: () => ({
-      qyy: "f22",
-      enrollCd: "00892",
+      yyyyq: 20221,
+      enrollCd: 12583,
     }),
     Navigate: (x) => {
       mockNavigate(x);
@@ -27,20 +27,91 @@ jest.mock("react-router-dom", () => {
 describe("CourseDetailsPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
-  const setupUserOnly = () => {
+  const testId = "CourseDetailsTable";
+
+  const setupAdminUser = () => {
     axiosMock.reset();
     axiosMock.resetHistory();
     axiosMock
       .onGet("/api/currentUser")
-      .reply(200, apiCurrentUserFixtures.userOnly);
+      .reply(200, apiCurrentUserFixtures.adminUser);
     axiosMock
       .onGet("/api/systemInfo")
       .reply(200, systemInfoFixtures.showingNeither);
   };
 
-  const queryClient = new QueryClient();
-  test("Renders expected content", () => {
-    setupUserOnly();
+  beforeEach(() => {
+    jest.spyOn(console, "error");
+    console.error.mockImplementation(() => null);
+  });
+
+  afterEach(() => {
+    console.error.mockRestore();
+  });
+
+  test("shows the correct info for admin users", async () => {
+    setupAdminUser();
+    const queryClient = new QueryClient();
+    axiosMock
+      .onGet(`/api/sections/sectionsearch?qtr=20221&enrollCode=12583`)
+      .reply(200, {
+        quarter: "20221",
+        courseId: "ECE       1A ",
+        title: "COMP ENGR SEMINAR",
+        contactHours: 10,
+        description:
+          "Introductory seminar to expose students to a broad range of topics in computer   engineering.",
+        college: "ENGR",
+        objLevelCode: "U",
+        subjectArea: "ECE     ",
+        unitsFixed: 1,
+        unitsVariableHigh: null,
+        unitsVariableLow: null,
+        delayedSectioning: null,
+        inProgressCourse: null,
+        gradingOption: "P",
+        instructionType: "SEM",
+        onLineCourse: false,
+        deptCode: "ECE  ",
+        generalEducation: [],
+        classSections: [
+          {
+            enrollCode: "12583",
+            section: "0100",
+            session: null,
+            classClosed: null,
+            courseCancelled: null,
+            gradingOptionCode: null,
+            enrolledTotal: 84,
+            maxEnroll: 100,
+            secondaryStatus: null,
+            departmentApprovalRequired: false,
+            instructorApprovalRequired: false,
+            restrictionLevel: null,
+            restrictionMajor: "+PRCME+CMPEN",
+            restrictionMajorPass: null,
+            restrictionMinor: null,
+            restrictionMinorPass: null,
+            concurrentCourses: [],
+            timeLocations: [
+              {
+                room: "1930",
+                building: "BUCHN",
+                roomCapacity: 100,
+                days: "M      ",
+                beginTime: "15:00",
+                endTime: "15:50",
+              },
+            ],
+            instructors: [
+              {
+                instructor: "WANG L C",
+                functionCode: "Teaching and in charge",
+              },
+            ],
+          },
+        ],
+      });
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -50,11 +121,19 @@ describe("CourseDetailsPage tests", () => {
       </QueryClientProvider>,
     );
 
-    // assert
+    await screen.findByTestId(`${testId}-cell-row-0-col-courseId`);
+
     expect(
-      screen.getByText("Course Details Placeholder Page"),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Quarter in qyy format: f22")).toBeInTheDocument();
-    expect(screen.getByText("EnrollCd: 00892")).toBeInTheDocument();
+      screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
+    ).toHaveTextContent("ECE 1A");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-quarter`),
+    ).toHaveTextContent("20221");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
+    ).toHaveTextContent("12583");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-title`),
+    ).toHaveTextContent("COMP ENGR SEMINAR");
   });
 });
