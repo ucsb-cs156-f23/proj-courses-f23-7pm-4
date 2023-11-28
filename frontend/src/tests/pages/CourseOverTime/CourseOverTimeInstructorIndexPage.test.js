@@ -127,12 +127,12 @@ describe("CourseOverTimeInstructorIndexPage tests", () => {
 
     expect(screen.getByText("ECE 1A")).toBeInTheDocument();
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
-    expect(screen.queryByText("➕")).toBeInTheDocument();
+    expect(screen.getByText("➕")).toBeInTheDocument();
 
     const expandButton = screen.getByText("➕");
     userEvent.click(expandButton);
 
-    expect(screen.queryByText("➖")).toBeInTheDocument();
+    expect(screen.getByText("➖")).toBeInTheDocument();
     expect(screen.queryByText("➕")).not.toBeInTheDocument();
   });
 });
