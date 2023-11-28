@@ -12,14 +12,34 @@ export default function CourseDetailsTable({ course }) {
       accessor: "quarter",
     },
     {
-      Header: "Enroll Code",
-      accessor: "classSections[0].enrollCode",
-      id: "enrollCode",
-    },
-    {
       Header: "Title",
       accessor: "title",
     },
+    {
+      Header: "Enrolled",
+      accessor: "classSections[1].enrolled",
+    },
+    {
+      Header: "Location",
+      accessor: "location",
+    },
+    {
+      Header: "Days",
+      accessor: "days",
+    },
+    {
+      Header: "Time",
+      accessor: "time",
+    },
+    {
+      Header: "Instructor",
+      accessor: "instructor",
+    },
+    {
+      Header: "Enroll Code",
+      accessor: "classSections[0].enrollCode",
+      id: "enrollCode",
+    }
   ];
 
   const testid = "CourseDetailsTable";
