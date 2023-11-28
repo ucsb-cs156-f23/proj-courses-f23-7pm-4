@@ -11,8 +11,7 @@ import {
   formatDays,
   formatInstructors,
   formatLocation,
-  formatTime,
-  isSection,
+  formatTime
 } from "main/utils/sectionUtils.js";
 
 describe("SectionsTableBase tests", () => {
@@ -47,8 +46,10 @@ describe("SectionsTableBase tests", () => {
     {
       Header: "Section Number",
       accessor: (row) => row.section.section,
-      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
       id: "sectionNumber",
+      
+      aggregate: getFirstVal,
+      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Enrolled",
