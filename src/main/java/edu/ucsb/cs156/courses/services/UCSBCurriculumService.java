@@ -296,11 +296,7 @@ public class UCSBCurriculumService {
       statusCode = re.getStatusCode();
       retVal = re.getBody();
     } catch (HttpClientErrorException e) {
-      if (e.getStatusCode().equals(HttpStatus.BAD_REQUEST)) {
-        retVal = "{\"error\": \"400: Bad Request\"}";
-      } else if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
-        retVal = "{\"error\": \"401: Unauthorized\"}";
-      }
+      retVal = "{\"error\": \"400: Bad Request\"}";
     }
     log.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
     return retVal;

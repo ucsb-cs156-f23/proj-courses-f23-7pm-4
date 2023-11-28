@@ -498,7 +498,7 @@ public class UCSBCurriculumServiceTests {
 
   @Test
   public void test_getFinals_exception() throws Exception {
-    String expectedResult = "{\"error\": \"401: Unauthorized\"}";
+    String expectedResult = "{\"error\": \"400: Bad Request\"}";
 
     when(restTemplate.exchange(
             any(String.class), eq(HttpMethod.GET), any(HttpEntity.class), eq(String.class)))
