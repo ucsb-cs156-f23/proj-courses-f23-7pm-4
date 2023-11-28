@@ -92,16 +92,16 @@ describe("JobsTable tests", () => {
 
     const expectedLogContent =
       "Line 1Line 2Line 3Line 4Line 5Line 6Line 7Line 8Line 9Line 10...";
-    expect(
-      screen.getByTestId(`JobsTable-cell-row-0-col-Log`),
-    ).toHaveTextContent(expectedLogContent);
+    expect(screen.getByTestId(`JobsTable-cell-row-0-col-Log`).textContent).toBe(
+      expectedLogContent,
+    );
   });
 
   test("Does not add ellipsis when logLines.length is less than or equal to 10", () => {
     const shortLog = Array.from(
       { length: 10 },
       (_, index) => `Line ${index + 1}`,
-    ).join("");
+    ).join("\n");
     const jobsWithShortLog = [{ ...jobsFixtures.sixJobs[0], log: shortLog }];
 
     render(
@@ -112,10 +112,11 @@ describe("JobsTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedLogContent = shortLog;
-    expect(
-      screen.getByTestId(`JobsTable-cell-row-0-col-Log`),
-    ).toHaveTextContent(expectedLogContent);
+    const expectedLogContent =
+      "Line 1Line 2Line 3Line 4Line 5Line 6Line 7Line 8Line 9Line 10";
+    expect(screen.getByTestId(`JobsTable-cell-row-0-col-Log`).textContent).toBe(
+      expectedLogContent,
+    );
   });
 
   // Add a test for the exact format of the output
@@ -135,9 +136,9 @@ describe("JobsTable tests", () => {
     );
 
     const expectedLogContent =
-      "Line 1Line 2Line 3Line 4Line 5Line 6Line 7Line 8Line 9Line 10...";
-    expect(
-      screen.getByTestId(`JobsTable-cell-row-0-col-Log`),
-    ).toHaveTextContent(expectedLogContent);
+      '<pre data-testid="plaintext"><span>Line 1</span><br><span>Line 2</span><br><span>Line 3</span><br><span>Line 4</span><br><span>Line 5</span><br><span>Line 6</span><br><span>Line 7</span><br><span>Line 8</span><br><span>Line 9</span><br><span>Line 10</span><br><span>...</span></pre>';
+    expect(screen.getByTestId(`JobsTable-cell-row-0-col-Log`).innerHTML).toBe(
+      expectedLogContent,
+    );
   });
 });
