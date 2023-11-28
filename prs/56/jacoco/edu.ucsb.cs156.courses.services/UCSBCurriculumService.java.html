@@ -296,14 +296,10 @@ public class UCSBCurriculumService {
 <span class="fc" id="L296">      statusCode = re.getStatusCode();</span>
 <span class="fc" id="L297">      retVal = re.getBody();</span>
 <span class="fc" id="L298">    } catch (HttpClientErrorException e) {</span>
-<span class="fc bfc" id="L299" title="All 2 branches covered.">      if (e.getStatusCode().equals(HttpStatus.BAD_REQUEST)) {</span>
-<span class="fc" id="L300">        retVal = &quot;{\&quot;error\&quot;: \&quot;400: Bad Request\&quot;}&quot;;</span>
-<span class="pc bpc" id="L301" title="1 of 2 branches missed.">      } else if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {</span>
-<span class="fc" id="L302">        retVal = &quot;{\&quot;error\&quot;: \&quot;401: Unauthorized\&quot;}&quot;;</span>
-      }
-<span class="fc" id="L304">    }</span>
-<span class="fc" id="L305">    log.info(&quot;json: {} contentType: {} statusCode: {}&quot;, retVal, contentType, statusCode);</span>
-<span class="fc" id="L306">    return retVal;</span>
+<span class="fc" id="L299">      retVal = &quot;{\&quot;error\&quot;: \&quot;400: Bad Request\&quot;}&quot;;</span>
+<span class="fc" id="L300">    }</span>
+<span class="fc" id="L301">    log.info(&quot;json: {} contentType: {} statusCode: {}&quot;, retVal, contentType, statusCode);</span>
+<span class="fc" id="L302">    return retVal;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
