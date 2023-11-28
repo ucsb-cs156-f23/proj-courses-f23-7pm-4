@@ -248,7 +248,7 @@ describe("Section tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-status`),
     ).toHaveTextContent("Open");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-status`),
+      screen.getAllByTestId(`${testId}-cell-row-1-col-status`)[0],
     ).toHaveTextContent("Full");
     expect(
       screen.getByTestId(`${testId}-cell-row-2-col-status`),
