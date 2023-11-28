@@ -23,7 +23,7 @@ describe("JobsTable tests", () => {
         <MemoryRouter>
           <JobsTable jobs={jobsFixtures.sixJobs} />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     const expectedHeaders = ["id", "Created", "Updated", "Status", "Log"];
@@ -41,23 +41,23 @@ describe("JobsTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "1"
+      "1",
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-Created`)
+      screen.getByTestId(`${testId}-cell-row-0-col-Created`),
     ).toHaveTextContent("1");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-Updated`)
+      screen.getByTestId(`${testId}-cell-row-0-col-Updated`),
     ).toHaveTextContent("11/13/2022, 19:49:59");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-status`)
+      screen.getByTestId(`${testId}-cell-row-0-col-status`),
     ).toHaveTextContent("complete");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-Log`)
+      screen.getByTestId(`${testId}-cell-row-0-col-Log`),
     ).toHaveTextContent("Hello World! from test job!Goodbye from test job!");
 
     expect(
-      screen.getByTestId(`JobsTable-header-id-sort-carets`)
+      screen.getByTestId(`JobsTable-header-id-sort-carets`),
     ).toHaveTextContent("🔽");
   });
 
@@ -67,16 +67,19 @@ describe("JobsTable tests", () => {
         <MemoryRouter>
           <JobsTable jobs={jobsFixtures.sixJobs} />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(
-      screen.getByTestId(`JobsTable-cell-row-0-col-Log`)
+      screen.getByTestId(`JobsTable-cell-row-0-col-Log`),
     ).toHaveTextContent("Hello World! from test job!Goodbye from test job!");
   });
 
   test("Renders the log text with ellipsis when it exceeds 10 lines", () => {
-    const longLog = Array.from({ length: 15 }, (_, index) => `Line ${index + 1}`).join("\n");
+    const longLog = Array.from(
+      { length: 15 },
+      (_, index) => `Line ${index + 1}`,
+    ).join("\n");
     const jobsWithLongLog = [{ ...jobsFixtures.sixJobs[0], log: longLog }];
 
     render(
@@ -84,12 +87,13 @@ describe("JobsTable tests", () => {
         <MemoryRouter>
           <JobsTable jobs={jobsWithLongLog} />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    const expectedLogContent = "Line 1Line 2Line 3Line 4Line 5Line 6Line 7Line 8Line 9Line 10...";
+    const expectedLogContent =
+      "Line 1Line 2Line 3Line 4Line 5Line 6Line 7Line 8Line 9Line 10...";
     expect(
-      screen.getByTestId(`JobsTable-cell-row-0-col-Log`)
+      screen.getByTestId(`JobsTable-cell-row-0-col-Log`),
     ).toHaveTextContent(expectedLogContent);
   });
 });
