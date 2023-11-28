@@ -21,7 +21,7 @@ export default function JobsTable({ jobs }) {
     PlaintextColumn("Log", (cell) => {
       const logLines = cell.row.original.log.split("\n");
       const truncatedLog =
-        logLines.length > 10
+        logLines.length >= 10
           ? logLines.slice(0, 10).join("\n") + "\n..."
           : cell.row.original.log;
       return truncatedLog;
