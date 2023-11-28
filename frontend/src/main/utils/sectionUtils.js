@@ -80,3 +80,11 @@ export const formatInstructors = (instructorArray) => {
 export const isSection = (en1) => {
   return en1.substring(2) !== "00";
 };
+
+//for creating section in table with course status
+export const formatStatus = (section) => {
+  if (section.courseCancelled) return "Cancelled";
+  if (section.classClosed) return "Closed";
+  if (section.enrolledTotal >= section.maxEnroll) return "Full";
+  return "Open";
+};
