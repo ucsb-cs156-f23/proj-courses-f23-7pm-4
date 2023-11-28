@@ -146,12 +146,7 @@
                     </execution>
                 </executions>
                 <configuration>
-<!--                     
-                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
-                    <dotGitDirectory>${project.basedir}/submodule_directory/.git</dotGitDirectory>
-                     <dotGitDirectory> /var/lib/jenkins/gitcache/proj-courses-f23-7pm-4.git</dotGitDirectory> 
-                    <generateGitPropertiesFile>true</generateGitPropertiesFile> -->
-                     <useNativeGit>false</useNativeGit>
+                    <useNativeGit>false</useNativeGit>
                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                     <failOnNoGitDirectory>false</failOnNoGitDirectory>
                     <abbrevLength>7</abbrevLength>
@@ -160,7 +155,6 @@
                     </gitDescribe>
                 </configuration>
             </plugin>
-
             <!-- Test case coverage report -->
             <plugin>
                 <groupId>org.jacoco</groupId>
