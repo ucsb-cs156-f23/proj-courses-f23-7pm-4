@@ -36,7 +36,7 @@ export default function JobsTable({ jobs }) {
       },
     ],
     // Stryker disable next-line all
-    []
+    [],
   );
 
   return (
