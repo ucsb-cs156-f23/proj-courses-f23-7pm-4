@@ -141,7 +141,6 @@
                     <execution>
                         <id>validate-the-git-infos</id>
                         <goals>
-                            <!-- <goal>validateRevision</goal> -->
                         </goals>
                     </execution>
                 </executions>
