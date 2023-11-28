@@ -12,6 +12,7 @@ import {
   formatInstructors,
   formatLocation,
   formatTime,
+  isSection,
 } from "main/utils/sectionUtils.js";
 
 describe("SectionsTableBase tests", () => {
@@ -44,12 +45,11 @@ describe("SectionsTableBase tests", () => {
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
-      Header: "Section Number",
-      accessor: (row) => row.section.section,
-      id: "sectionNumber",
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
+      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
+      Header: "Is Section?",
+      accessor: (row) => isSection(row.section.section),
+      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
+      id: "isSection",
     },
     {
       Header: "Enrolled",
