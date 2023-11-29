@@ -131,7 +131,7 @@ describe("CourseOverTimeInstructorIndexPage tests", () => {
 
     const expandRow = screen.getByText("➕");
     userEvent.click(expandRow);
-    
+
     expect(screen.getByText("ECE 1A")).toBeInTheDocument();
     expect(screen.getByText("➖")).toBeInTheDocument();
     expect(screen.queryByText("➕")).not.toBeInTheDocument();
