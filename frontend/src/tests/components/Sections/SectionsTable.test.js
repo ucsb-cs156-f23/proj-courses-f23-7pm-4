@@ -114,6 +114,7 @@ describe("Section tests", () => {
       "Time",
       "Instructor",
       "Enroll Code",
+      "Section Number",
     ];
     const expectedFields = [
       "quarter",
@@ -126,6 +127,7 @@ describe("Section tests", () => {
       "time",
       "instructor",
       "section.enrollCode",
+      "sectionNumber",
     ];
     const testId = "SectionsTable";
 
@@ -168,6 +170,9 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-section.enrollCode`),
     ).toHaveTextContent("12583");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-sectionNumber`),
+    ).toHaveTextContent("0100");
   });
 
   test("Correctly groups separate lectures of the same class", async () => {
