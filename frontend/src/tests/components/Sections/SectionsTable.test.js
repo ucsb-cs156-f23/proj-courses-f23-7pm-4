@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { fiveSections, gigaSections } from "fixtures/sectionFixtures";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -38,6 +38,7 @@ describe("Section tests", () => {
       "Course ID",
       "Title",
       "Enrolled",
+      "Status",
       "Location",
       "Days",
       "Time",
@@ -49,11 +50,12 @@ describe("Section tests", () => {
       "courseInfo.courseId",
       "courseInfo.title",
       "enrolled",
+      "status",
       "location",
       "days",
       "time",
       "instructor",
-      "section.enrollCode",
+      "enrollCode",
     ];
     const testId = "SectionsTable";
 
@@ -85,11 +87,20 @@ describe("Section tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-enrolled`),
     ).toHaveTextContent("84/100");
     expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-status`),
+    ).toHaveTextContent("Open");
+    expect(
       screen.getByTestId(`${testId}-cell-row-2-col-location`),
     ).toHaveTextContent("HFH 1124");
     expect(
       screen.getByTestId(`${testId}-cell-row-2-col-instructor`),
     ).toHaveTextContent("YUNG A S");
+
+    const detailsButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-ⓘ-button`,
+    );
+    expect(detailsButton).toBeInTheDocument();
+    expect(detailsButton).toHaveClass("btn-primary");
   });
 
   test("Has the expected column headers and content", async () => {
@@ -106,6 +117,7 @@ describe("Section tests", () => {
       "Course ID",
       "Title",
       "Enrolled",
+      "Status",
       "Location",
       "Days",
       "Time",
@@ -117,11 +129,12 @@ describe("Section tests", () => {
       "courseInfo.courseId",
       "courseInfo.title",
       "enrolled",
+      "status",
       "location",
       "days",
       "time",
       "instructor",
-      "section.enrollCode",
+      "enrollCode",
     ];
     const testId = "SectionsTable";
 
@@ -153,13 +166,16 @@ describe("Section tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-enrolled`),
     ).toHaveTextContent("84/100");
     expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-status`),
+    ).toHaveTextContent("Open");
+    expect(
       screen.getByTestId(`${testId}-cell-row-0-col-location`),
     ).toHaveTextContent("BUCHN 1930");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-instructor`),
     ).toHaveTextContent("WANG L C");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-section.enrollCode`),
+      screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
     ).toHaveTextContent("12583");
   });
 
@@ -213,5 +229,61 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-2-col-enrolled`),
     ).toHaveTextContent("21/21");
+  });
+
+  test("Details button navigates to the details page", async () => {
+    const testId = "SectionsTable";
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SectionsTable sections={fiveSections} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(
+      await screen.findByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
+    ).toHaveTextContent("ECE 1A");
+
+    const detailsButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-ⓘ-button`,
+    );
+    expect(detailsButton).toBeInTheDocument();
+
+    fireEvent.click(detailsButton);
+
+    await waitFor(() =>
+      expect(mockedNavigate).toHaveBeenCalledWith("/coursedetails/W22/12583"),
+    );
+  });
+
+  test("all course statuses", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SectionsTable sections={fiveSections} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const testId = "SectionsTable";
+
+    const expandRow = screen.getByTestId(
+      `${testId}-cell-row-1-col-courseInfo.courseId-expand-symbols`,
+    );
+    fireEvent.click(expandRow);
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-status`),
+    ).toHaveTextContent("Open");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-status`),
+    ).toHaveTextContent("Full");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-status`),
+    ).toHaveTextContent("Closed");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-3-col-status`),
+    ).toHaveTextContent("Cancelled");
   });
 });
