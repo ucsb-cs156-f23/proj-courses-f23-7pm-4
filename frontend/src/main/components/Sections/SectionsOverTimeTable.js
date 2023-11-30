@@ -1,5 +1,6 @@
 import SectionsOverTimeTableBase from "main/components/SectionsOverTimeTableBase";
-
+import { ButtonColumn } from "main/components/OurTable";
+import { useNavigate } from "react-router-dom";
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 import {
   convertToFraction,
@@ -20,13 +21,16 @@ function getCourseId(courseIds) {
 }
 
 export default function SectionsOverTimeTable({ sections }) {
-  // Stryker enable all
-  // Stryker disable BooleanLiteral
+  const navigate = useNavigate();
+  const detailsCallback = (cell) => {
+    navigate(
+      `/coursedetails/${cell.row.values.quarter}/${cell.row.values.enrollCode}`,
+    );
+  };
   const columns = [
     {
       Header: "Quarter",
       accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
-      disableGroupBy: true,
       id: "quarter",
 
       Cell: ({ cell: { value } }) => value,
@@ -34,7 +38,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Course ID",
       accessor: "courseInfo.courseId",
-      disableGroupBy: true,
 
       aggregate: getCourseId,
       Aggregated: ({ cell: { value } }) => `${value}`,
@@ -44,7 +47,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Title",
       accessor: "courseInfo.title",
-      disableGroupBy: true,
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
@@ -60,7 +62,6 @@ export default function SectionsOverTimeTable({ sections }) {
       Header: "Enrolled",
       accessor: (row) =>
         convertToFraction(row.section.enrolledTotal, row.section.maxEnroll),
-      disableGroupBy: true,
       id: "enrolled",
 
       aggregate: getFirstVal,
@@ -69,7 +70,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Status",
       accessor: (row) => formatStatus(row.section),
-      disableGroupBy: true,
       id: "status",
 
       aggregate: getFirstVal,
@@ -78,7 +78,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Location",
       accessor: (row) => formatLocation(row.section.timeLocations),
-      disableGroupBy: true,
       id: "location",
 
       aggregate: getFirstVal,
@@ -87,7 +86,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Days",
       accessor: (row) => formatDays(row.section.timeLocations),
-      disableGroupBy: true,
       id: "days",
 
       aggregate: getFirstVal,
@@ -96,7 +94,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Time",
       accessor: (row) => formatTime(row.section.timeLocations),
-      disableGroupBy: true,
       id: "time",
 
       aggregate: getFirstVal,
@@ -105,7 +102,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Instructor",
       accessor: (row) => formatInstructors(row.section.instructors),
-      disableGroupBy: true,
       id: "instructor",
 
       aggregate: getFirstVal,
@@ -114,7 +110,7 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Enroll Code",
       accessor: "section.enrollCode",
-      disableGroupBy: true,
+      id: "enrollCode",
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
@@ -123,7 +119,12 @@ export default function SectionsOverTimeTable({ sections }) {
 
   const testid = "SectionsOverTimeTable";
 
-  const columnsToDisplay = columns;
+  const buttonColumns = [
+    ...columns,
+    ButtonColumn("ⓘ", "primary", detailsCallback, "SectionsOverTimeTable"),
+  ];
+
+  const columnsToDisplay = buttonColumns;
 
   return (
     <SectionsOverTimeTableBase
