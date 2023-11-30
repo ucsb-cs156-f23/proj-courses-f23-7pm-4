@@ -74,10 +74,11 @@ export const quartersNewRange = (beginYYYYQStr, endYYYYQStr) => {
     const yyyyqStr = fromNumericYYYYQ(yyyyqInt);
     quarterList.push({
       yyyyq: yyyyqStr,
-      qyy: `${shortQuarters[parseInt(yyyyqStr.charAt(4)) - 1]}${yyyyqStr.substring(
-        2,
-        4,
-      )}${" "}${quartersInLowercase[parseInt(yyyyqStr.charAt(4)) - 1]}${" Courses"}`,
+      qyy: `${
+        shortQuarters[parseInt(yyyyqStr.charAt(4)) - 1]
+      }${yyyyqStr.substring(2, 4)}${" "}${
+        quartersInLowercase[parseInt(yyyyqStr.charAt(4)) - 1]
+      }${" Courses"}`,
     });
   }
   return quarterList;

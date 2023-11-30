@@ -1,12 +1,18 @@
-
 import { Button, Form } from "react-bootstrap";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import PersonalScheduleDropdown from "main/components/PersonalSchedules/PersonalScheduleDropdown";
 
-
-function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" , setSchedule, schedules, controlId, onChange}) {
+function CourseForm({
+  initialCourse,
+  submitAction,
+  buttonLabel = "Create",
+  setSchedule,
+  schedules,
+  controlId,
+  onChange,
+}) {
   // Stryker disable all
   const {
     register,
@@ -15,14 +21,13 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" , setS
   } = useForm({ defaultValues: initialCourse || {} });
   // Stryker enable all
   useEffect(() => {
-  if (schedules && schedules.length >= 1 && !initialCourse) {
-    setSchedule(schedules[0].id);
-  }
-  
-}, [schedules, setSchedule, initialCourse]);
+    if (schedules && schedules.length >= 1 && !initialCourse) {
+      setSchedule(schedules[0].id);
+    }
+  }, [schedules, setSchedule, initialCourse]);
 
   const navigate = useNavigate();
-console.log("schedules", schedules);
+  console.log("schedules", schedules);
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       {initialCourse && (
@@ -55,7 +60,6 @@ console.log("schedules", schedules);
         </Form.Control.Feedback>
       </Form.Group>
 
-      
       {/* <Form.Group className="mb-3"> 
         <Form.Label htmlFor="psId">Personal Schedule ID</Form.Label>
         <Form.Control
@@ -74,11 +78,10 @@ console.log("schedules", schedules);
       <Form.Group className="mb-3" data-testid="CourseForm-psId">
         <PersonalScheduleDropdown
           setSchedule={setSchedule}
-          schedules = {schedules}
-          controlId = {controlId}
-          onChange = {onChange}
+          schedules={schedules}
+          controlId={controlId}
+          onChange={onChange}
         />
-        
       </Form.Group>
       {/* <Form.Group className="mb-3">
       <Form.Label htmlFor="psId">Personal Schedule ID</Form.Label>

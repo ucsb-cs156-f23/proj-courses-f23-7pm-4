@@ -13,7 +13,7 @@ const PersonalScheduleDropdown = ({
 
   const [scheduleState, setScheduleState] = useState(
     // Stryker disable next-line all : not sure how to test/mock local storage
-    localSearchSchedule || schedules[0].id,
+    localSearchSchedule || (schedules.length > 0 ? schedules[0].id : null),
   );
 
   const handleScheduleOnChange = (event) => {
@@ -27,7 +27,6 @@ const PersonalScheduleDropdown = ({
   };
 
   console.log("schedules", schedules);
-
 
   return (
     <Form.Group controlId={controlId}>

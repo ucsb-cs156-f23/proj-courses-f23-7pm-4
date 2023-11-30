@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function PSCourseCreatePage() {
   const controlId = "PSCourseCreatePage";
-  
+
   const {
     data: schedules,
     error: _error,
@@ -19,12 +19,10 @@ export default function PSCourseCreatePage() {
     [],
   );
 
-  const onSuccess = (_course) => {
-    
-  };
+  const onSuccess = (_course) => {};
   const localSearchSchedule = localStorage.getItem(controlId);
   console.log("localSearchSchedule", localSearchSchedule);
-  const defaultSchedule = (schedules && schedules.length >= 1 );
+  const defaultSchedule = schedules && schedules.length >= 1;
   console.log("defaultSchedule", defaultSchedule);
   const [schedule, setSchedule] = useState(defaultSchedule);
   console.log("right after useState, schedule=", schedule);
@@ -33,7 +31,7 @@ export default function PSCourseCreatePage() {
     setSchedule(selectedSchedule);
     console.log("selectedSchedule", selectedSchedule);
     console.log("schedule", schedule);
-  }
+  };
   const objectToAxiosParams = (course) => ({
     url: "/api/courses/post",
     method: "POST",
@@ -58,40 +56,38 @@ export default function PSCourseCreatePage() {
   if (isSuccess) {
     return <Navigate to="/courses/list" />;
   }
-  if (schedules == null || schedules.length === 0)  {
+  if (schedules == null || schedules.length === 0) {
     return (
       <BasicLayout>
         <div className="pt-2">
           <h1>Create New Course</h1>
           <p data-testid="PSCourseCreate-Error">
-            Error: No Personal Schedules found. Please create a Personal Schedule first.
+            Error: No Personal Schedules found. Please create a Personal
+            Schedule first.
           </p>
         </div>
       </BasicLayout>
     );
   }
   console.log("right before render, schedule =", schedule);
-    return (
-      <BasicLayout>
-        <div className="pt-2">
-          <h1>Create New Course</h1>
+  return (
+    <BasicLayout>
+      <div className="pt-2">
+        <h1>Create New Course</h1>
 
-          <CourseForm 
-            submitAction={onSubmit} 
-            setSchedule = {setSchedule}
-            schedules = {schedules}
-            controlId = {controlId}
-            onChange = {onScheduleChange}
-          />
-          {mutation.isError && (
-            <p data-testid="PSCourseCreate-Error">
-              Error: {mutation.error.response.data?.message}
-            </p>
-          
-          )}
-        </div>
-      </BasicLayout>
-    );
-
-  
+        <CourseForm
+          submitAction={onSubmit}
+          setSchedule={setSchedule}
+          schedules={schedules}
+          controlId={controlId}
+          onChange={onScheduleChange}
+        />
+        {mutation.isError && (
+          <p data-testid="PSCourseCreate-Error">
+            Error: {mutation.error.response.data?.message}
+          </p>
+        )}
+      </div>
+    </BasicLayout>
+  );
 }
