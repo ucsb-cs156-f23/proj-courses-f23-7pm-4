@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ucsb.cs156.courses.documents.ConvertedSection;
 import edu.ucsb.cs156.courses.documents.CoursePage;
-import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +50,9 @@ public class UCSBCurriculumService {
 
   public static final String ALL_SECTIONS_ENDPOINT =
       "https://api.ucsb.edu/academics/curriculums/v3/classes/{quarter}/{enrollcode}";
+
+  public static final String FINALS_ENDPOINT =
+      "https://api.ucsb.edu/academics/curriculums/v3/finals";
 
   public String getJSON(String subjectArea, String quarter, String courseLevel) {
 
@@ -264,6 +266,37 @@ public class UCSBCurriculumService {
       retVal = re.getBody();
     } catch (HttpClientErrorException e) {
       retVal = "{\"error\": \"401: Unauthorized\"}";
+    }
+    log.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
+    return retVal;
+  }
+
+  public String getFinalsJSON(String quarter, String enrollCode) {
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    headers.set("ucsb-api-version", "3.0");
+    headers.set("ucsb-api-key", this.apiKey);
+
+    HttpEntity<String> entity = new HttpEntity<>("body", headers);
+
+    String params = String.format("?quarter=%s&enrollCode=%s", quarter, enrollCode);
+
+    String url = FINALS_ENDPOINT + params;
+
+    log.info("url=" + url);
+
+    String retVal = "";
+    MediaType contentType = null;
+    HttpStatus statusCode = null;
+    try {
+      ResponseEntity<String> re = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+      contentType = re.getHeaders().getContentType();
+      statusCode = re.getStatusCode();
+      retVal = re.getBody();
+    } catch (HttpClientErrorException e) {
+      retVal = "{\"error\": \"400: Bad Request\"}";
     }
     log.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
     return retVal;
