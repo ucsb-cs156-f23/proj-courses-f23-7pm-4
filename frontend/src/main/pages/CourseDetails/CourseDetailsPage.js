@@ -2,9 +2,11 @@ import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import { useBackend } from "main/utils/useBackend";
 import CourseDetailsTable from "main/components/Courses/CourseDetailsTable";
 import { useParams } from "react-router-dom";
+import { qyyToYyyyq } from "main/utils/quarterUtilities.js";
 
 export default function CourseDetailsPage() {
-  const { yyyyq, enrollCd } = useParams();
+  const { qyy, enrollCd } = useParams();
+  const yyyyq = qyy && qyyToYyyyq(qyy.toString());
 
   const { data: personalSection } = useBackend(
     // Stryker disable all : hard to test for query caching
@@ -15,7 +17,7 @@ export default function CourseDetailsPage() {
       url: `/api/sections/sectionsearch?qtr=${yyyyq}&enrollCode=${enrollCd}`,
     },
   );
-
+  // Stryker restore all
   return (
     <BasicLayout>
       <div className="pt-2">
