@@ -1,33 +1,23 @@
 
-import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import SingleQuarterDropdown from "../Quarters/SingleQuarterDropdown";
-import { quartersNewRange } from "main/utils/CoursesUtils";
+import PersonalScheduleDropdown from "main/components/PersonalSchedules/PersonalScheduleDropdown";
 
 
-function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
+function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" , setSchedule, schedules, controlId, onChange}) {
   // Stryker disable all
   const {
     register,
     formState: { errors },
-    data: systemInfo,
     handleSubmit,
   } = useForm({ defaultValues: initialCourse || {} });
   // Stryker enable all
   
-  const startQtr = systemInfo?.startQtrYYYYQ || "20211";
-  const endQtr = systemInfo?.endQtrYYYYQ || "20222";
-  const quarters = quartersNewRange(startQtr, endQtr);
+  
 
   const navigate = useNavigate();
-  const [quarter, setQuarter] = useState(
-    {
-      quarters: quarters,
-    }.quarters[0],
-  );
-
+console.log("schedules", schedules);
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       {initialCourse && (
@@ -77,14 +67,12 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
         </Form.Control.Feedback>
       </Form.Group> */}
       <Form.Group className="mb-3" data-testid="CourseForm-psId">
-        <SingleQuarterDropdown
-          psId={quarter}
-          setQuarter={setQuarter}
-          controlId={"CourseForm-psId"}
-          label={"Schedule"}
-          quarters={quarters}
+        <PersonalScheduleDropdown
+          setSchedule={setSchedule}
+          schedules = {schedules}
+          controlId = {controlId}
+          onChange = {onChange}
         />
-        
         
       </Form.Group>
       {/* <Form.Group className="mb-3">

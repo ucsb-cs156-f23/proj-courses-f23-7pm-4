@@ -3,9 +3,8 @@ import { Form } from "react-bootstrap";
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 
 const PersonalScheduleDropdown = ({
-  schedules,
-  schedule,
   setSchedule,
+  schedules,
   controlId,
   onChange = null,
   label = "Schedule",
@@ -14,7 +13,7 @@ const PersonalScheduleDropdown = ({
 
   const [scheduleState, setScheduleState] = useState(
     // Stryker disable next-line all : not sure how to test/mock local storage
-    localSearchSchedule || schedule,
+    localSearchSchedule || schedules[0].id,
   );
 
   const handleScheduleOnChange = (event) => {
@@ -26,6 +25,9 @@ const PersonalScheduleDropdown = ({
       onChange(event);
     }
   };
+
+  console.log("schedules", schedules);
+
 
   return (
     <Form.Group controlId={controlId}>
