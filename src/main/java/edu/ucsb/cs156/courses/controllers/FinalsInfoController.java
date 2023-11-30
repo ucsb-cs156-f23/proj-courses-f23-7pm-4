@@ -1,6 +1,5 @@
 package edu.ucsb.cs156.courses.controllers;
 
-import edu.ucsb.cs156.courses.entities.FinalsInfo;
 import edu.ucsb.cs156.courses.repositories.FinalsInfoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -24,7 +23,7 @@ public class FinalsInfoController extends ApiController {
   @GetMapping("")
   @PreAuthorize("hasRole('ROLE_USER')")
   @Operation(summary = "Get finals information for a specific course")
-  public FinalsInfo getFinalsInfo(
+  public void getFinalsInfo(
       @Parameter(
               name = "quarter",
               description = "Quarter identifier, e.g., 'f23' for Fall 2023",
@@ -38,10 +37,5 @@ public class FinalsInfoController extends ApiController {
               example = "12345",
               required = true)
           @RequestParam
-          String enrollCd) {
-    // FinalsInfo finalsInfo = getFinalsInfo(quarter, enrollCd)
-    //     .orElseThrow(() -> new EntityNotFoundException(FinalsInfo.class, quarter, enrollCd));
-    // return finalsInfo;
-    return null;
-  }
+          String enrollCd) {}
 }
