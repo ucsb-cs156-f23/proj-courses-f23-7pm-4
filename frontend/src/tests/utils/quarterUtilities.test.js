@@ -2,6 +2,7 @@ import {
   fromFormat,
   toFormat,
   yyyyqToQyy,
+  qyyToYyyyq,
   fromNumericYYYYQ,
   toNumericYYYYQ,
   nextQuarter,
@@ -33,6 +34,13 @@ describe("QuarterFormSelect conversion tests", () => {
     expect(yyyyqToQyy("20202")).toBe("S20");
     expect(yyyyqToQyy("20193")).toBe("M19");
     expect(yyyyqToQyy("20184")).toBe("F18");
+  });
+
+  test("qyyToYyyyq correctly converts", () => {
+    expect(qyyToYyyyq("W21")).toBe("20211");
+    expect(qyyToYyyyq("S20")).toBe("20202");
+    expect(qyyToYyyyq("M19")).toBe("20193");
+    expect(qyyToYyyyq("F18")).toBe("20184");
   });
 
   test("fromNumericYYYYQ correctly converts", () => {

@@ -81,17 +81,17 @@ function App() {
               path="/personalschedules/details/:id"
               element={<PersonalSchedulesDetailsPage />}
             />
-            <Route
-              exact
-              path="/coursedetails/:yyyyq/:enrollCd"
-              element={<CourseDetailsPage />}
-            />
           </>
         )}
         <Route
           exact
           path="/coursedescriptions/search"
           element={<CourseDescriptionIndexPage />}
+        />
+        <Route
+          exact
+          path="/coursedetails/:qyy/:enrollCd"
+          element={<CourseDetailsPage />}
         />
         <Route
           exact
