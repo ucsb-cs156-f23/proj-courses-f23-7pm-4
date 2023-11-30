@@ -15,39 +15,39 @@ export default function CourseDetailsTable({ course }) {
       Header: "Title",
       accessor: "title",
      },
-    // {
-    //   Header: "Enrolled",
-    //   accessor: (row) => row.classSections[0].enrolledTotal,
-    //   id: "enrolledTotal",
-    // },
-    // {
-    //   Header: "Location",
-    //   accessor: (row) => row.classSections[0].timeLocations[0].building,
-    //   id: "building",
-    // },
-    // {
-    //   Header: "Days",
-    //   accessor: (row) => row.classSections[0].timeLocations[0].days,
-    //   id: "days",
-    // },
-    // {
-    //   Header: "Time",
-    //   accessor: (row) =>
-    //     row.classSections[0].timeLocations[0].beginTime +
-    //     "-" +
-    //     row.classSections[0].timeLocations[0].endTime,
-    //   id: "time",
-    // },
-    // {
-    //   Header: "Instructor",
-    //   accessor: (row) => row.classSections[0].instructors[0].instructor,
-    //   id: "instructor",
-    // },
-    // {
-    //   Header: "Enroll Code",
-    //   accessor: (row) => row.classSections[0].enrollCode,
-    //   id: "enrollCode",
-    // },
+    {
+      Header: "Enrolled",
+      accessor: (row) => row.classSections[0].enrolledTotal,
+      id: "enrolledTotal",
+    },
+    {
+      Header: "Location",
+      accessor: (row) => row.classSections[0].timeLocations[0].building,
+      id: "building",
+    },
+    {
+      Header: "Days",
+      accessor: (row) => row.classSections[0].timeLocations[0].days,
+      id: "days",
+    },
+    {
+      Header: "Time",
+      accessor: (row) =>
+        row.classSections[0].timeLocations[0].beginTime +
+        "-" +
+        row.classSections[0].timeLocations[0].endTime,
+      id: "time",
+    },
+    {
+      Header: "Instructor",
+      accessor: (row) => row.classSections[0].instructors[0].instructor,
+      id: "instructor",
+    },
+    {
+      Header: "Enroll Code",
+      accessor: (row) => row.classSections[0].enrollCode,
+      id: "enrollCode",
+    },
   ];
 
   const testid = "CourseDetailsTable";
