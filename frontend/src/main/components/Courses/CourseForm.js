@@ -1,5 +1,6 @@
 
 import { Button, Form } from "react-bootstrap";
+import { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import PersonalScheduleDropdown from "main/components/PersonalSchedules/PersonalScheduleDropdown";
@@ -13,8 +14,12 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" , setS
     handleSubmit,
   } = useForm({ defaultValues: initialCourse || {} });
   // Stryker enable all
+  useEffect(() => {
+  if (schedules && schedules.length >= 1 && !initialCourse) {
+    setSchedule(schedules[0].id);
+  }
   
-  
+}, [schedules, setSchedule, initialCourse]);
 
   const navigate = useNavigate();
 console.log("schedules", schedules);

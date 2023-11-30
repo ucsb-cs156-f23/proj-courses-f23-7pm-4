@@ -23,7 +23,8 @@ export default function PSCourseCreatePage() {
     
   };
   const localSearchSchedule = localStorage.getItem(controlId);
-  const defaultSchedule = localSearchSchedule || (schedules && schedules.length >= 1 ) ? schedules[0].id : null;
+  console.log("localSearchSchedule", localSearchSchedule);
+  const defaultSchedule = (schedules && schedules.length >= 1 );
   console.log("defaultSchedule", defaultSchedule);
   const [schedule, setSchedule] = useState(defaultSchedule);
   console.log("right after useState, schedule=", schedule);
