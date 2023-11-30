@@ -16,6 +16,12 @@ const yyyyqToQyy = (yyyyq) => {
   )}`;
 };
 
+const qyyToYyyyq = (qyy) => {
+  const quarter = shortQuarters.indexOf(qyy.charAt(0).toUpperCase()) + 1;
+  const year = `20${qyy.substring(1, 3)}`;
+  return `${year}${quarter}`;
+};
+
 const toFormat = (quarter, year) => {
   return year.toString() + parseInt(quarter).toString();
 };
@@ -88,6 +94,7 @@ export {
   fromFormat,
   toFormat,
   yyyyqToQyy,
+  qyyToYyyyq,
   fromNumericYYYYQ,
   toNumericYYYYQ,
   nextQuarter,

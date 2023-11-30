@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import {
   fiveSections,
   sixSections,
@@ -59,7 +59,7 @@ describe("Section tests", () => {
       "days",
       "time",
       "instructor",
-      "section.enrollCode",
+      "enrollCode",
     ];
     const testId = "SectionsOverTimeTable";
 
@@ -132,7 +132,7 @@ describe("Section tests", () => {
       "days",
       "time",
       "instructor",
-      "section.enrollCode",
+      "enrollCode",
     ];
     const testId = "SectionsOverTimeTable";
 
@@ -173,8 +173,13 @@ describe("Section tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-instructor`),
     ).toHaveTextContent("LOKSHTANOV D");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-section.enrollCode`),
+      screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
     ).toHaveTextContent("08078");
+    const detailsButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-ⓘ-button`,
+    );
+    expect(detailsButton).toBeInTheDocument();
+    expect(detailsButton).toHaveClass("btn-primary");
   });
 
   test("Correctly groups separate quarters of the same class", async () => {
@@ -227,6 +232,32 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-2-col-enrolled`),
     ).toHaveTextContent("21/21");
+  });
+
+  test("Details button navigates to the details page", async () => {
+    const testId = "SectionsOverTimeTable";
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SectionsOverTimeTable sections={fiveSections} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(
+      await screen.findByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
+    ).toHaveTextContent("ECE 5");
+
+    const detailsButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-ⓘ-button`,
+    );
+    expect(detailsButton).toBeInTheDocument();
+
+    fireEvent.click(detailsButton);
+
+    await waitFor(() =>
+      expect(mockedNavigate).toHaveBeenCalledWith("/coursedetails/S22/12591"),
+    );
   });
 
   test("all course statuses", () => {
