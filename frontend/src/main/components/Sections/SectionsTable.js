@@ -109,6 +109,14 @@ export default function SectionsTable({ sections, canExpand = true }) {
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
+    {
+      Header: "Section Number",
+      accessor: (row) => row.section.section,
+      id: "sectionNumber",
+
+      aggregate: getFirstVal,
+      Aggregated: ({ cell: { value } }) => `${value}`,
+    },
   ];
 
   const testid = "SectionsTable";
