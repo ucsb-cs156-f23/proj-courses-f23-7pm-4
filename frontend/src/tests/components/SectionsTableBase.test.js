@@ -149,4 +149,17 @@ describe("SectionsTableBase tests", () => {
       "background: rgb(52, 133, 155); color: rgb(239, 252, 244); font-weight: bold;",
     );
   });
+
+  test("when canExpand set to false, no dropdown buttons are displayed", () => {
+    render(
+      <SectionsTableBase
+        columns={columns}
+        data={fiveSections}
+        group={false}
+        canExpand={false}
+      />,
+    );
+    expect(screen.queryByText("➖")).not.toBeInTheDocument();
+    expect(screen.queryByText("➕")).not.toBeInTheDocument();
+  });
 });

@@ -1,5 +1,6 @@
 import SectionsTableBase from "main/components/SectionsTableBase";
-
+import { ButtonColumn } from "main/components/OurTable";
+import { useNavigate } from "react-router-dom";
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 import {
   convertToFraction,
@@ -8,20 +9,25 @@ import {
   formatLocation,
   formatTime,
   isSection,
+  formatStatus,
 } from "main/utils/sectionUtils.js";
 
 function getFirstVal(values) {
   return values[0];
 }
 
-export default function SectionsTable({ sections }) {
-  // Stryker enable all
-  // Stryker disable BooleanLiteral
+export default function SectionsTable({ sections, canExpand = true }) {
+  const navigate = useNavigate();
+  const detailsCallback = (cell) => {
+    navigate(
+      `/coursedetails/${cell.row.values.quarter}/${cell.row.values.enrollCode}`,
+    );
+  };
+
   const columns = [
     {
       Header: "Quarter",
       accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
-      disableGroupBy: true,
       id: "quarter",
 
       aggregate: getFirstVal,
@@ -30,13 +36,11 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Course ID",
       accessor: "courseInfo.courseId",
-
       Cell: ({ cell: { value } }) => value.substring(0, value.length - 2),
     },
     {
       Header: "Title",
       accessor: "courseInfo.title",
-      disableGroupBy: true,
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
@@ -52,8 +56,15 @@ export default function SectionsTable({ sections }) {
       Header: "Enrolled",
       accessor: (row) =>
         convertToFraction(row.section.enrolledTotal, row.section.maxEnroll),
-      disableGroupBy: true,
       id: "enrolled",
+
+      aggregate: getFirstVal,
+      Aggregated: ({ cell: { value } }) => `${value}`,
+    },
+    {
+      Header: "Status",
+      accessor: (row) => formatStatus(row.section),
+      id: "status",
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
@@ -61,7 +72,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Location",
       accessor: (row) => formatLocation(row.section.timeLocations),
-      disableGroupBy: true,
       id: "location",
 
       aggregate: getFirstVal,
@@ -70,7 +80,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Days",
       accessor: (row) => formatDays(row.section.timeLocations),
-      disableGroupBy: true,
       id: "days",
 
       aggregate: getFirstVal,
@@ -79,7 +88,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Time",
       accessor: (row) => formatTime(row.section.timeLocations),
-      disableGroupBy: true,
       id: "time",
 
       aggregate: getFirstVal,
@@ -88,7 +96,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Instructor",
       accessor: (row) => formatInstructors(row.section.instructors),
-      disableGroupBy: true,
       id: "instructor",
 
       aggregate: getFirstVal,
@@ -97,7 +104,7 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Enroll Code",
       accessor: "section.enrollCode",
-      disableGroupBy: true,
+      id: "enrollCode",
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
@@ -106,13 +113,19 @@ export default function SectionsTable({ sections }) {
 
   const testid = "SectionsTable";
 
-  const columnsToDisplay = columns;
+  const buttonColumns = [
+    ...columns,
+    ButtonColumn("ⓘ", "primary", detailsCallback, "SectionsTable"),
+  ];
+
+  const columnsToDisplay = buttonColumns;
 
   return (
     <SectionsTableBase
       data={sections}
       columns={columnsToDisplay}
       testid={testid}
+      canExpand={canExpand}
     />
   );
 }
